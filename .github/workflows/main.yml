@@ -35,19 +35,18 @@ jobs:
         run: docker run usladelfino/api-restful-nodejs:latest npm test
 
   deploy:
-  needs: build-and-test
-  runs-on: ubuntu-latest # ou outra versão de SO suportada pelo Webdock
-  steps:
-    - name: Set up SSH connection to Webdock
-      uses: webdockio/ssh-action@v1.4
-      with:
-        ssh-private-key: ${{ secrets.WEBDOCK_SSH_KEY }}
-        known-hosts: ${{ secrets.WEBDOCK_KNOWN_HOSTS }}
-        user: ${{ secrets.WEBDOCK_USER }}
-        host: ${{ secrets.WEBDOCK_HOST }}
+    needs: build-and-test
+    runs-on: ubuntu-latest # ou outra versão de SO suportada pelo Webdock
+    steps:
+      - name: Set up SSH connection to Webdock
+        uses: webdockio/ssh-action@v1.4
+        with:
+          ssh-private-key: ${{ secrets.WEBDOCK_SSH_KEY }}
+          known-hosts: ${{ secrets.WEBDOCK_KNOWN_HOSTS }}
+          user: ${{ secrets.WEBDOCK_USER }}
+          host: ${{ secrets.WEBDOCK_HOST }}
 
-    - name: Deploy code to Webdock
-      run: |
-        ssh ${{ secrets.WEBDOCK_USER }}@${{ secrets.WEBDOCK_HOST }} "cd /var/www/html/api-restful-nodejs && git pull && docker-compose up -d"
-
-          
+      - name: Deploy code to Webdock
+        run: |
+          sshpass -p ${{ secrets.WEBDOCK_PASSWORD }} rsync -avz --delete -e ssh /github/workspace/ ${secrets.WEBDOCK_USER}@${secrets.WEBDOCK_HOST}:/var/www/html/api-restful-nodejs
+          ssh ${{ secrets.WEBDOCK_USER }}@${{ secrets.WEBDOCK_HOST }} "cd /var/www/html/api-restful-nodejs && docker-compose up -d"
