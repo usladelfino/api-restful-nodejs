@@ -1,2 +1,27 @@
+# Arquivos e pastas a serem ignorados
 node_modules
+npm-debug.log
+yarn-error.log
+.DS_Store
+
+# Arquivos gerados automaticamente que devem ser ignorados
+coverage
+dist
+build
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Outros arquivos e pastas que devem ser ignorados
+.dockerignore
+.git
+.gitignore
+.idea
 .vscode
+*.code-workspace
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

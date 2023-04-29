@@ -1,2 +1,25 @@
-node_modules
-.vscode
+# Arquivos gerados automaticamente que devem ser ignorados
+node_modules/
+coverage/
+build/
+dist/
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Arquivos de ambiente que devem ser ignorados
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependências de desenvolvimento
+/devDependencies
+
+# Dependências de sistema
+/npm-debug.log*
+/yarn-error.log*
+/.pnp*
+.pnp.js

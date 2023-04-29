@@ -3,7 +3,7 @@ const request = require('supertest');
 
 describe('Testes da API de Produtos', () => {
     let idProduto;
-  
+
     test('Deve retornar uma lista de produtos', async () => {
       const response = await request(app).get('/produtos');
       expect(response.statusCode).toBe(200);

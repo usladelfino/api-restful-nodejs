@@ -63,10 +63,12 @@ app.delete('/produtos/:id', (req, res) => {
     res.send(`Produto ${id} removido com sucesso.`);
   });
 
-const PORT = process.env.PORT || 3000;
+  if (process.env.NODE_ENV !== 'test') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Servidor iniciado na porta ${PORT}`);
+    });
+  }
 
-app.listen(PORT, () => {
-    console.log(`Servidor iniciado na porta ${PORT}`);
-});
 
 module.exports = app;
