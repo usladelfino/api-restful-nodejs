@@ -35,6 +35,7 @@ jobs:
         run: docker run usladelfino/api-restful-nodejs:latest npm test
 
   deploy:
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
       - name: Set up SSH connection to Webdock
