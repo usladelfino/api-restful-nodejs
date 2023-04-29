@@ -35,16 +35,17 @@ jobs:
         run: docker run usladelfino/api-restful-nodejs:latest npm test
 
   deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest # ou outra versão de SO suportada pelo Webdock
+    runs-on: ubuntu-latest
     steps:
       - name: Set up SSH connection to Webdock
-        uses: appleboy/ssh-action@master
+        uses: webdeveric/ssh-deploy@v2.2.1
         with:
-          host: ${{ secrets.WEBDOCK_HOST }}
-          username: ${{ secrets.WEBDOCK_USER }}
-          password: ${{ secrets.WEBDOCK_PASSWORD }}
-          script: |
-            cd /home/admin/api-restful-nodejs
-            git pull
-            docker-compose up -d
+          ssh-private-key: ${{ secrets.WEBDOCK_SSH_KEY }}
+          known-hosts: ${{ secrets.WEBDOCK_KNOWN_HOSTS }}
+          server: ${{ secrets.WEBDOCK_USER }}@${{ secrets.WEBDOCK_HOST }}
+          source: .
+          dest: /home/admin/api-restful-nodejs
+
+      - name: Run docker-compose
+        run: |
+          ssh ${{ secrets.WEBDOCK_USER }}@${{ secrets.WEBDOCK_HOST }} "cd /home/admin/api-restful-nodejs && docker-compose up -d"
