@@ -63,12 +63,6 @@ app.delete('/produtos/:id', (req, res) => {
     res.send(`Produto ${id} removido com sucesso.`);
 });
 
-app.post('/webhook', (req, res) => {
-    console.log(req.body); // Aqui você pode fazer o processamento do corpo da requisição (payload) do Github
-    res.status(200).send('Recebido com sucesso!'); // Retorna uma resposta de sucesso para o Github
-});
-
-
 if (process.env.NODE_ENV !== 'test') {
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
