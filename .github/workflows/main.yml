@@ -41,4 +41,5 @@ jobs:
       - name: Deploy to Webdock
         run: |
           sudo apt-get install -y sshpass # Instala o pacote sshpass
-          sshpass -p ${{ secrets.WEBDOCK_PASSWORD }} rsync -ravz --exclude 'exclude_folder' ./ ${secrets.WEBDOCK_USER}@${secrets.WEBDOCK_HOST}:/home/admin/api-restful-nodejs/
+          sshpass -p "${{ secrets.WEBDOCK_PASSWORD }}" rsync -ravz --exclude 'exclude_folder' ./ "${{ secrets.WEBDOCK_USER }}"@"${{ secrets.WEBDOCK_HOST }}":/home/admin/api-restful-nodejs/
+          
