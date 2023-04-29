@@ -36,17 +36,15 @@ jobs:
 
   deploy:
     needs: build-and-test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # ou outra versão de SO suportada pelo Webdock
     steps:
       - name: Set up SSH connection to Webdock
         uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.WEBDOCK_SSH_KEY }}
-          known-hosts: ${{ secrets.WEBDOCK_KNOWN_HOSTS }}
-          username: ${{ secrets.WEBDOCK_USER }}
           host: ${{ secrets.WEBDOCK_HOST }}
-
-      - name: Deploy code to Webdock
-        run: |
-          sshpass -p ${{ secrets.WEBDOCK_PASSWORD }} rsync -avz --delete -e ssh /github/workspace/ ${secrets.WEBDOCK_USER}@${secrets.WEBDOCK_HOST}:/home/admin/api-restful-nodejs
-          ssh ${{ secrets.WEBDOCK_USER }}@${{ secrets.WEBDOCK_HOST }} "cd /home/admin/api-restful-nodejs && docker-compose up -d"
+          username: ${{ secrets.WEBDOCK_USER }}
+          password: ${{ secrets.WEBDOCK_PASSWORD }}
+          script: |
+            cd /home/admin/api-restful-nodejs
+            git pull
+            docker-compose up -d
