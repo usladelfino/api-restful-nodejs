@@ -38,14 +38,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up SSH connection to Webdock
-        uses: webdeveric/ssh-deploy@v2.2.1
+        uses: appleboy/ssh-action@master
         with:
           ssh-private-key: ${{ secrets.WEBDOCK_SSH_KEY }}
           known-hosts: ${{ secrets.WEBDOCK_KNOWN_HOSTS }}
-          server: ${{ secrets.WEBDOCK_USER }}@${{ secrets.WEBDOCK_HOST }}
-          source: .
-          dest: /home/admin/api-restful-nodejs
+          username: ${{ secrets.WEBDOCK_USER }}
+          host: ${{ secrets.WEBDOCK_HOST }}
 
-      - name: Run docker-compose
+      - name: Deploy code to Webdock
         run: |
+          sshpass -p ${{ secrets.WEBDOCK_PASSWORD }} rsync -avz --delete -e ssh /github/workspace/ ${secrets.WEBDOCK_USER}@${secrets.WEBDOCK_HOST}:/home/admin/api-restful-nodejs
           ssh ${{ secrets.WEBDOCK_USER }}@${{ secrets.WEBDOCK_HOST }} "cd /home/admin/api-restful-nodejs && docker-compose up -d"
