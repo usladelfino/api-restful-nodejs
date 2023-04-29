@@ -9,6 +9,6 @@
     "supertest": "^6.3.3"
   },
   "scripts": {
-    "test": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1"
+    "test": "jest --forceExit --no-watch"
   }
 }
