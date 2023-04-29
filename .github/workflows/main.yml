@@ -34,4 +34,5 @@ jobs:
           push: true
           tags: usladelfino/api-restful-nodejs:latest
           
-      
+      - name: Run Docker tests
+        run: docker run usladelfino/api-restful-nodejs:latest npm test
