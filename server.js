@@ -6,11 +6,11 @@ app.use(bodyParser.json());
 
 const lista_produtos = {
     produtos: [
-        { id: 1, descricao: "Arroz parboilizado 5Kg", valor: 25.00, marca: "Tio João"  },
-        { id: 2, descricao: "Maionese 250gr", valor: 7.20, marca: "Helmans"  },
-        { id: 3, descricao: "Iogurte Natural 200ml", valor: 2.50, marca: "Itambé"  },
-        { id: 4, descricao: "Batata Maior Palha 300gr", valor: 15.20, marca: "Chipps"  },
-        { id: 5, descricao: "Nescau 400gr", valor: 8.00, marca: "Nestlé"  },
+        { id: 1, descricao: "Arroz parboilizado 5Kg", valor: 25.00, marca: "Tio João" },
+        { id: 2, descricao: "Maionese 250gr", valor: 7.20, marca: "Helmans" },
+        { id: 3, descricao: "Iogurte Natural 200ml", valor: 2.50, marca: "Itambé" },
+        { id: 4, descricao: "Batata Maior Palha 300gr", valor: 15.20, marca: "Chipps" },
+        { id: 5, descricao: "Nescau 400gr", valor: 8.00, marca: "Nestlé" },
     ]
 };
 
@@ -57,18 +57,24 @@ app.delete('/produtos/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const index = lista_produtos.produtos.findIndex(p => p.id === id);
     if (index === -1) {
-      return res.status(404).send('Produto não encontrado');
+        return res.status(404).send('Produto não encontrado');
     }
     lista_produtos.produtos.splice(index, 1);
     res.send(`Produto ${id} removido com sucesso.`);
-  });
+});
 
-  if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test') {
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
-      console.log(`Servidor iniciado na porta ${PORT}`);
+        console.log(`Servidor iniciado na porta ${PORT}`);
     });
-  }
+}
+
+app.post('/webhook', (req, res) => {
+    console.log(req.body); // Aqui você pode fazer o processamento do corpo da requisição (payload) do Github
+    res.status(200).send('Recebido com sucesso!'); // Retorna uma resposta de sucesso para o Github
+});
+
 
 
 module.exports = app;
