@@ -45,6 +45,7 @@ jobs:
           username: ${{ secrets.WEBDOCK_USER }}
           key: ${{ secrets.WEBDOCK_SSH_KEY }}
           script: |
-            cd /home/admin/api-restful-nodejs
-            git pull
-            docker-compose up -d
+            docker pull usladelfino/api-restful-nodejs:latest
+            docker stop api-restful-nodejs || true
+            docker rm api-restful-nodejs || true
+            docker run -d --name api-restful-nodejs -p 3000:3000 usladelfino/api-restful-nodejs:latest
