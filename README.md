@@ -1,7 +1,2 @@
 # api-restful-nodejs
-#
-#
-#
-#
-#
-#
+
