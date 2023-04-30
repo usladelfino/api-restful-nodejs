@@ -45,12 +45,11 @@ jobs:
           username: ${{ secrets.WEBDOCK_USER }}
           key: ${{ secrets.WEBDOCK_SSH_KEY }}
           script: |
-            pm2 stop server
             docker pull usladelfino/api-restful-nodejs:latest
             if docker inspect api-restful-nodejs &> /dev/null; then
               docker stop api-restful-nodejs || true
               docker rm api-restful-nodejs || true
             fi
             docker run  -d --name api-restful-nodejs -p 3000:3000 usladelfino/api-restful-nodejs:latest
-            pm2 start server
             docker system prune -f
+            
