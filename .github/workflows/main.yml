@@ -41,7 +41,7 @@ jobs:
       - name: Set up SSH connection to Webdock
         uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.WEBDOCK_SSH_KEY }}
+          password: ${{ secrets.WEBDOCK_PASSWORD }}
           known-hosts: ${{ secrets.WEBDOCK_KNOWN_HOSTS }}
           user: ${{ secrets.WEBDOCK_USER }}
           host: ${{ secrets.WEBDOCK_HOST }}
