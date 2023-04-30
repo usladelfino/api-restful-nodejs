@@ -42,9 +42,11 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.WEBDOCK_HOST }}
+          port: ${{ secrets.WEBDOCK_PORT }}
           username: ${{ secrets.WEBDOCK_USER }}
-          password: ${{ secrets.WEBDOCK_PASSWORD }}
+          key: ${{ secrets.WEBDOCK_SSH_KEY }}
           script: |
             cd /home/admin/api-restful-nodejs
             git pull
             docker-compose up -d
+            
