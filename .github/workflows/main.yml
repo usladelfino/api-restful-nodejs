@@ -46,6 +46,4 @@ jobs:
           key: ${{ secrets.WEBDOCK_SSH_KEY }}
           script: |
             docker pull usladelfino/api-restful-nodejs:latest
-            docker stop api-restful-nodejs || true
-            docker rm api-restful-nodejs || true
             docker run -d --name api-restful-nodejs -p 3000:3000 usladelfino/api-restful-nodejs:latest
