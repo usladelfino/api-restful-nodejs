@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest # ou outra versão de SO suportada pelo Webdock
     steps:
       - name: Set up SSH connection to Webdock
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.WEBDOCK_HOST }}
           username: ${{ secrets.WEBDOCK_USER }}
