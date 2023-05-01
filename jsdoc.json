@@ -1,0 +1,10 @@
+{
+    "source": {
+      "include": ["./server.js", "./controller.js"],  
+      "exclude": ["./node_modules"]
+    },
+    "opts": {
+      "destination": "./docs"
+    }
+  }
+  
