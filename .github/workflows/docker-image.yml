@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
 
 jobs:
 
@@ -23,7 +23,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t usladelfino/api-restful-nodejs:latest .
         
-      - name: Run tests
+      - name: Run Docker image tests
         run: docker run usladelfino/api-restful-nodejs:latest npm test
         
       - name: Push Docker image
