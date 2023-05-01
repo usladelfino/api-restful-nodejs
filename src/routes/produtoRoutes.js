@@ -1,3 +1,9 @@
+/**
+
+Módulo que define as rotas para manipulação dos recursos relacionados a produtos.
+@module routes/produtoRoutes
+*/
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const produtoController = require('../controllers/produtoController');

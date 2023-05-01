@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: routes/produtoRoutes.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,37 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: routes/produtoRoutes.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
 
+Módulo que define as rotas para manipulação dos recursos relacionados a produtos.
+@module routes/produtoRoutes
+*/
 
-    <h3> </h3>
+const express = require('express');
+const bodyParser = require('body-parser');
+const produtoController = require('../controllers/produtoController');
+const router = express.Router();
 
+router.use(bodyParser.json());
 
+router.get('/', produtoController.getProdutos);
+router.get('/:id', produtoController.getProdutoById);
+router.post('/', produtoController.createProduto);
+router.put('/:id', produtoController.updateProdutoById);
+router.delete('/:id', produtoController.deleteProduto);
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
+module.exports = router;</code></pre>
+        </article>
+    </section>
 
 
 
