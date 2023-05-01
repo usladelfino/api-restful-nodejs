@@ -1,10 +1,25 @@
 {
-    "source": {
-      "include": ["./server.js", "./controller.js"],  
-      "exclude": ["./node_modules"]
-    },
-    "opts": {
-      "destination": "./docs"
+  "source": {
+    "include": ["./src"],
+    "exclude": ["./node_modules", "./__tests__", "./vscode"]
+  },
+  "sourceType": "module",
+  "plugins": [],
+  "recurseDepth": 10,
+  "opts": {
+    "recurse": true,
+    "destination": "./docs",
+    "includePattern": ".+\\.js(doc|x)?$"
+  },
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true
     }
   }
-  
+}
