@@ -30,3 +30,5 @@ jobs:
           branch: main
           directory: .
           force: true
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }
