@@ -2,9 +2,7 @@ FROM node:latest
 
 WORKDIR /app
 
-COPY package*.json ./
-COPY src ./src
-COPY __tests__ ./__tests__
+COPY . .
 
 RUN npm install
 
