@@ -3,6 +3,12 @@ name: CI/CD
 on:
   push:
     branches:
+      - main
+      - develop
+  pull_request:
+    types: [closed]
+    branches:
+      - main
       - develop
 
 jobs:
