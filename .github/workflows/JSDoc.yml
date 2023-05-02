@@ -29,9 +29,9 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            git config --global user.name usladelfino
-            git config --global user.email delfino.usla@gmail.com
+            git config --global user.name "usladelfino"
+            git config --global user.email "delfino.usla@gmail.com"
             git add -A
-            git commit -m "Documentation update"
+            git commit -m "Atualização da documentação"
             git push origin main
 
