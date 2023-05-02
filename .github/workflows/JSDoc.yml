@@ -11,8 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: npm install
+      - name: Install JSDoc
+        run: npm install -g jsdoc
       - name: Generate documentation
         run: npm run docs
       - name: Deploy documentation
