@@ -25,12 +25,13 @@ jobs:
           git add docs/
           git commit -m "Update documentation"
       - name: Push Changes
-        uses: actions/github-script@v4
+        uses: actions/github-script@v4.2.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            git config --global user.name "usladelfino"
-            git config --global user.email "delfino.usla@gmail.com"
+            git config --global user.name usladelfino
+            git config --global user.email delfino.usla@gmail.com
             git add -A
             git commit -m "Documentation update"
             git push origin main
+
