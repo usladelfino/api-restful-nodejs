@@ -2,7 +2,7 @@ name: Docker CI
 
 on:
   workflow_run:
-    workflows: ["Node.Js CI"]
+    workflows: ["Node.js CI"]
     branches: ["main", "develop"]
     types:
       - completed    
