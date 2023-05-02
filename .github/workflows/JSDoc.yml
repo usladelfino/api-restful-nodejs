@@ -1,4 +1,4 @@
-name: Documentação com JSDoc
+name: JSDoc
 
 on:
   push:
@@ -8,30 +8,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      - name: Install dependencies
+        run: npm ci
+      - name: Generate documentation
+        run: npm run docs
+      - name: Deploy documentation
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          node-version: '14.x'
-      - name: Install Dependencies
-        run: npm install
-      - name: Generate Documentation with JSDoc
-        run: npx jsdoc -c jsdoc.json
-      - name: Commit Documentation
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add docs/
-          git commit -m "Update documentation"
-      - name: Push Changes
-        uses: actions/github-script@v4.2.0
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          script: |
-            git config --global user.name "usladelfino"
-            git config --global user.email "delfino.usla@gmail.com"
-            git add -A
-            git commit -m "Atualização da documentação"
-            git push origin main
-
+          personal_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./docs
