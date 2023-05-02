@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "test": "jest --forceExit --detectOpenHandles --no-watch"
+    "test": "jest --forceExit --detectOpenHandles --no-watch",
+    "docs": "jsdoc -c jsdoc.json"
   }
 }
