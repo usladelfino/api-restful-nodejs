@@ -1,12 +1,15 @@
 name: JSDoc
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Node.js CI"]
+    branches: ["main", "develop"]
+    types:
+      - completed   
 
 jobs:
   build:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
