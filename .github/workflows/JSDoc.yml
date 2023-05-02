@@ -1,4 +1,4 @@
-name: Gerar Documentação com JSDoc
+name: Documentação com JSDoc
 
 on:
   push:
