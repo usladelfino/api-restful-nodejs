@@ -33,7 +33,7 @@ router.use(bodyParser.json());
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object[]} Array contendo todos os fornecedores.
  */
-router.get('/fornecedores', fornecedorController.getfornecedores);
+router.get('/fornecedores', fornecedorController.getFornecedores);
 
 /**
  * Rota para buscar um fornecedor específico pelo ID.
@@ -46,7 +46,7 @@ router.get('/fornecedores', fornecedorController.getfornecedores);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do fornecedor encontrado.
  */
-router.get('/fornecedores/:id', fornecedorController.getfornecedorById);
+router.get('/fornecedores/:id', fornecedorController.getFornecedorById);
 
 /**
  * Rota para criar um novo fornecedor.
@@ -59,7 +59,7 @@ router.get('/fornecedores/:id', fornecedorController.getfornecedorById);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do novo fornecedor criado.
  */
-router.post('/fornecedores', fornecedorController.createfornecedor);
+router.post('/fornecedores', fornecedorController.createFornecedor);
 
 /**
  * Rota para atualizar informações de um fornecedor existente.
@@ -72,7 +72,7 @@ router.post('/fornecedores', fornecedorController.createfornecedor);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do fornecedor atualizado.
  */
-router.put('/fornecedores/:id', fornecedorController.updatefornecedor);
+router.put('/fornecedores/:id', fornecedorController.updateFornecedor);
 
 /**
  * Rota para excluir um fornecedor existente.
@@ -85,6 +85,6 @@ router.put('/fornecedores/:id', fornecedorController.updatefornecedor);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do fornecedor excluído.
  */
-router.delete('/fornecedores/:id', fornecedorController.deletefornecedor);
+router.delete('/fornecedores/:id', fornecedorController.deleteFornecedor);
 
 module.exports = router;
