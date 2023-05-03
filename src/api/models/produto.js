@@ -1,4 +1,4 @@
-const db = require('../repository/database');
+const db = require('../../repository/database');
 
 const produtoModel = {
     getProdutos: async () => {
