@@ -10,7 +10,7 @@
 const http = require('http');
 const serveStatic = require('serve-static');
 const express = require('express');
-const produtoRoutes = require('./routes/produtoRoutes');
+const produtoRoutes = require('./api/routes/produtoRoutes');
 
 const app = express();
 
@@ -28,7 +28,7 @@ const serve = serveStatic('./docs', { 'index': ['index.html'] });
 /** 
  * @description Utiliza as rotas definidas em produtoRoutes para a rota '/produtos'
  */
-app.use('/produtos', produtoRoutes);
+app.use('/api', produtoRoutes);
 
 /** 
  * @constant {Object} server

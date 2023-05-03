@@ -1,9 +1,19 @@
 {
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "knex": "^2.4.2",
+    "mysql": "^2.18.1",
     "nodemon": "^2.0.22",
-    "serve-static": "^1.15.0"
+    "oracledb": "^5.5.0",
+    "pg": "^8.10.0",
+    "postgres": "^3.3.4",
+    "serve-static": "^1.15.0",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "jest": "^29.5.0",
