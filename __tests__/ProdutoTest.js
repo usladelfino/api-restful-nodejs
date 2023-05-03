@@ -1,51 +1,65 @@
 const request = require('supertest');
-const app = require("../src/server");
+const app = require('../src/server');
 
-describe('Testando as rotas do produto', () => {
-  test('Deve criar um novo produto', async () => {
+describe('Testes de integração para o recurso de Produto', () => {
+  let produtoId = null;
+
+  it('Deve criar um novo produto', async () => {
     const response = await request(app)
       .post('/produtos')
       .send({
-        descricao: 'Produto de Teste',
+        descricao: 'produto de teste',
         valor: 9.99,
-        marca: 'Marca de Teste'
+        marca: 'Genérico'
       });
-    expect(response.statusCode).toBe(201);
-    expect(response.body).toHaveProperty('descricao', 'Produto de Teste');
-    expect(response.body).toHaveProperty('valor', 9.99);
-    expect(response.body).toHaveProperty('marca', 'Marca de Teste');
+
+    expect(response.status).toBe(201);
+    expect(response.body.descricao).toBe('produto de teste');
+    expect(response.body.valor).toBe("9.99");
+    expect(response.body.marca).toBe('Genérico');
+    expect(response.body).toHaveProperty('id');
+
+    produtoId = response.body.id;
   });
 
-  test('Deve retornar uma lista com todos os produtos', async () => {
+  it('Deve listar todos os produtos', async () => {
     const response = await request(app).get('/produtos');
-    expect(response.statusCode).toBe(200);
+
+    expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Array);
+    expect(response.body.length).toBeGreaterThan(0);
   });
 
-  test('Deve retornar um produto com um id específico', async () => {
-    const response = await request(app).get('/produtos/1');
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('descricao', 'Arroz parboilizado 5Kg');
-    expect(response.body).toHaveProperty('valor', 25.00);
-    expect(response.body).toHaveProperty('marca', 'Tio João');
+  
+  it('Deve buscar um produto pelo ID', async () => {
+    const response = await request(app).get(`/produtos/${produtoId}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.descricao).toBe('produto de teste');
+    expect(response.body.valor).toBe("9.99");
+    expect(response.body.marca).toBe('Genérico');
+    expect(response.body.id).toBe(produtoId);
   });
 
-  test('Deve atualizar um produto com um id específico', async () => {
+  it('Deve atualizar um produto pelo ID', async () => {
     const response = await request(app)
-      .put('/produtos/1')
+      .put(`/produtos/${produtoId}`)
       .send({
-        descricao: 'Produto Genérico',
-        valor: 19.99,
-        marca: 'Marca Genérica'
+        descricao: 'produto de teste alterado',
+        valor: 10.99,
+        marca: 'Super Genérico'
       });
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty('descricao', 'Produto Genérico');
-    expect(response.body).toHaveProperty('valor', 19.99);
-    expect(response.body).toHaveProperty('marca', 'Marca Genérica');
+
+    expect(response.status).toBe(200);
+    expect(response.body.descricao).toBe('produto de teste alterado');
+    expect(response.body.valor).toBe("10.99");
+    expect(response.body.marca).toBe('Super Genérico');
+    expect(response.body.id).toBe(produtoId);
   });
 
-  test('Deve deletar um produto com um id específico', async () => {
-    const response = await request(app).delete('/produtos/1');
-    expect(response.statusCode).toBe(204);
+  it('Deve excluir um produto pelo ID', async () => {
+    const response = await request(app).delete(`/produtos/${produtoId}`);
+
+    expect(response.status).toBe(204);
   });
 });

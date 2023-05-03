@@ -5,83 +5,68 @@
 
 const produtoModel = require('../models/produto');
 
-/**
- * Objeto que contém as funções de controle para o recurso de produtos.
- * @type {Object}
- */
-const produtoController = {};
-
-/**
- * Função de controle que retorna a lista de produtos.
- * @param {Object} req - Objeto de requisição.
- * @param {Object} res - Objeto de resposta.
- */
-produtoController.getProdutos = (req, res) => {
-  res.json(produtoModel.lista_produtos.produtos);
-};
-
-/**
- * Função de controle que retorna um produto pelo seu ID.
- * @param {Object} req - Objeto de requisição.
- * @param {Object} res - Objeto de resposta.
- */
-produtoController.getProdutoById = (req, res) => {
-  const produto = produtoModel.lista_produtos.produtos.find(p => p.id === parseInt(req.params.id));
-  if (!produto) {
-    return res.status(404).send('Produto não encontrado');
+const produtoController = {
+  getProdutos: async (req, res) => {
+    try {
+      const produtos = await produtoModel.getProdutos();
+      res.json(produtos);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+  getProdutoById: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const produto = await produtoModel.getProdutoById(id);
+      if (!produto) {
+        return res.status(404).send('Produto não encontrado');
+      }
+      res.json(produto);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+  createProduto: async (req, res) => {
+    const produtoData = req.body;
+    try {
+      const produto = await produtoModel.createProduto(produtoData);
+      res.status(201).json(produto);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+  updateProduto: async (req, res) => {
+    const { id } = req.params;
+    const ProdutoData = req.body;
+    try {
+      const produto = await produtoModel.getProdutoById(id);
+      if (!produto) {
+        return res.status(404).send('Produto não encontrado');
+      }
+      const updatedProduto = await produtoModel.updateProduto(id, ProdutoData);
+      res.json(updatedProduto);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+  deleteProduto: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const produto = await produtoModel.getProdutoById(id);
+      if (!produto) {
+        return res.status(404).send('Produto não encontrado');
+      }
+      const deletedProduto = await produtoModel.deleteProduto(id);
+      res.status(204).json(deletedProduto);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
   }
-  res.json(produto);
-};
+}
 
-/**
- * Função de controle que cria um novo produto.
- * @param {Object} req - Objeto de requisição.
- * @param {Object} res - Objeto de resposta.
- */
-produtoController.createProduto = (req, res) => {
-  const produto = {
-    id: produtoModel.lista_produtos.produtos.length + 1,
-    descricao: req.body.descricao,
-    valor: req.body.valor,
-    marca: req.body.marca
-  };
-  produtoModel.lista_produtos.produtos.push(produto);
-  res.status(201).json(produto);
-};
-
-/**
- * Função de controle que atualiza um produto pelo seu ID.
- * @param {Object} req - Objeto de requisição.
- * @param {Object} res - Objeto de resposta.
- */
-produtoController.updateProdutoById = (req, res) => {
-  const produto = produtoModel.lista_produtos.produtos.find(p => p.id === parseInt(req.params.id));
-  if (!produto) {
-    return res.status(404).send('Produto não encontrado');
-  }
-  produto.descricao = req.body.descricao;
-  produto.valor = req.body.valor;
-  produto.marca = req.body.marca;
-  res.json(produto);
-};
-
-/**
- * Função de controle que deleta um produto pelo seu ID.
- * @param {Object} req - Objeto de requisição.
- * @param {Object} res - Objeto de resposta.
- */
-produtoController.deleteProduto = (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = produtoModel.lista_produtos.produtos.findIndex(p => p.id === id);
-  if (index === -1) {
-    return res.status(404).send('Produto não encontrado');
-  }
-  produtoModel.lista_produtos.produtos.splice(index, 1);
-  res.status(204).send(`Produto ${id} removido com sucesso.`);
-};
-
-/**
- * Exporta o objeto com as funções de controle para o recurso de produtos.
- * @type {Object}
- */
 module.exports = produtoController;
