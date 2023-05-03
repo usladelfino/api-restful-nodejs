@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: produtoController</title>
+    <title>JSDoc: Source: api/routes/produtoRoutes.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,96 +17,37 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: produtoController</h1>
+    <h1 class="page-title">Source: api/routes/produtoRoutes.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">Módulo que contém as funções de controle para o recurso de produtos.</div>
-        
+Módulo que define as rotas para manipulação dos recursos relacionados a produtos.
+@module routes/produtoRoutes
+*/
 
-        
+const express = require('express');
+const bodyParser = require('body-parser');
+const produtoController = require('../controllers/produtoController');
+const router = express.Router();
 
+router.use(bodyParser.json());
 
-<dl class="details">
+router.get('/produtos', produtoController.getProdutos);
+router.get('/produtos/:id', produtoController.getProdutoById);
+router.post('/produtos', produtoController.createProduto);
+router.put('/produtos/:id', produtoController.updateProduto);
+router.delete('/produtos/:id', produtoController.deleteProduto);
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_controllers_produtoController.js.html">api/controllers/produtoController.js</a>, <a href="api_controllers_produtoController.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = router;</code></pre>
+        </article>
+    </section>
 
 
 
