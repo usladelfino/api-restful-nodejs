@@ -6,7 +6,7 @@ describe('Testes de integração para o recurso de Produto', () => {
 
   it('Deve criar um novo produto', async () => {
     const response = await request(app)
-      .post('/produtos')
+      .post('/api/produtos')
       .send({
         descricao: 'produto de teste',
         valor: 9.99,
@@ -23,7 +23,7 @@ describe('Testes de integração para o recurso de Produto', () => {
   });
 
   it('Deve listar todos os produtos', async () => {
-    const response = await request(app).get('/produtos');
+    const response = await request(app).get('/api/produtos');
 
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Array);
@@ -32,7 +32,7 @@ describe('Testes de integração para o recurso de Produto', () => {
 
   
   it('Deve buscar um produto pelo ID', async () => {
-    const response = await request(app).get(`/produtos/${produtoId}`);
+    const response = await request(app).get(`/api/produtos/${produtoId}`);
 
     expect(response.status).toBe(200);
     expect(response.body.descricao).toBe('produto de teste');
@@ -43,7 +43,7 @@ describe('Testes de integração para o recurso de Produto', () => {
 
   it('Deve atualizar um produto pelo ID', async () => {
     const response = await request(app)
-      .put(`/produtos/${produtoId}`)
+      .put(`/api/produtos/${produtoId}`)
       .send({
         descricao: 'produto de teste alterado',
         valor: 10.99,
@@ -58,7 +58,7 @@ describe('Testes de integração para o recurso de Produto', () => {
   });
 
   it('Deve excluir um produto pelo ID', async () => {
-    const response = await request(app).delete(`/produtos/${produtoId}`);
+    const response = await request(app).delete(`/api/produtos/${produtoId}`);
 
     expect(response.status).toBe(204);
   });

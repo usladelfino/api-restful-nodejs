@@ -11,10 +11,10 @@ const router = express.Router();
 
 router.use(bodyParser.json());
 
-router.get('/', produtoController.getProdutos);
-router.get('/:id', produtoController.getProdutoById);
-router.post('/', produtoController.createProduto);
-router.put('/:id', produtoController.updateProduto);
-router.delete('/:id', produtoController.deleteProduto);
+router.get('/produtos', produtoController.getProdutos);
+router.get('/produtos/:id', produtoController.getProdutoById);
+router.post('/produtos', produtoController.createProduto);
+router.put('/produtos/:id', produtoController.updateProduto);
+router.delete('/produtos/:id', produtoController.deleteProduto);
 
 module.exports = router;
