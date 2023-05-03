@@ -4,7 +4,7 @@ const app = require('../src/server');
 describe('Testes de integração para o recurso de Produto', () => {
   let produtoId = null;
 
-  it('Deve criar um novo produto', async () => {
+  it('Deve cadastrar um novo produto', async () => {
     const response = await request(app)
       .post('/api/produtos')
       .send({

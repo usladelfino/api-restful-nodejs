@@ -11,6 +11,7 @@ const http = require('http');
 const serveStatic = require('serve-static');
 const express = require('express');
 const produtoRoutes = require('./api/routes/produtoRoutes');
+const fornecedorRoutes = require('./api/routes/fornecedorRoutes');
 
 const app = express();
 
@@ -26,9 +27,10 @@ const jsdocPort = process.env.JSDOC_PORT || 80;
 const serve = serveStatic('./docs', { 'index': ['index.html'] });
 
 /** 
- * @description Utiliza as rotas definidas em produtoRoutes para a rota '/produtos'
+ * @description Utiliza as rotas definidas '/produtos' e '/fornecedores'
  */
 app.use('/api', produtoRoutes);
+app.use('/api', fornecedorRoutes);
 
 /** 
  * @constant {Object} server
