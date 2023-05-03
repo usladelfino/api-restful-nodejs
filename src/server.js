@@ -1,38 +1,40 @@
 /**
- * @file server.js é o arquivo principal da aplicação
- * @requires http
- * @requires serve-static
- * @requires express
- * @requires produtoRoutes
- * @module server
+ * Módulo principal da aplicação web.
+ * @module index
  */
 
 const http = require('http');
 const serveStatic = require('serve-static');
 const express = require('express');
 const produtoRoutes = require('./api/routes/produtoRoutes');
+const fornecedorRoutes = require('./api/routes/fornecedorRoutes');
 
 const app = express();
 
-/** @constant {number} apiPort - Porta utilizada pela API */
+/**
+ * Porta para a API. Pode ser definida pela variável de ambiente API_PORT ou padrão para 3000.
+ * @type {number}
+ */
 const apiPort = process.env.API_PORT || 3000;
-/** @constant {number} jsdocPort - Porta utilizada pela documentação */
+
+/**
+ * Porta para o servidor de documentação. Pode ser definida pela variável de ambiente JSDOC_PORT ou padrão para 80.
+ * @type {number}
+ */
 const jsdocPort = process.env.JSDOC_PORT || 80;
 
-/** 
- * @constant {Function} serve 
- * @description Middleware que serve os arquivos estáticos da documentação
+/**
+ * Middleware para servir arquivos estáticos da documentação JSDoc.
+ * @type {function}
  */
 const serve = serveStatic('./docs', { 'index': ['index.html'] });
 
-/** 
- * @description Utiliza as rotas definidas em produtoRoutes para a rota '/produtos'
- */
 app.use('/api', produtoRoutes);
+app.use('/api', fornecedorRoutes);
 
-/** 
- * @constant {Object} server
- * @description Cria servidor HTTP para lidar com as requisições de arquivos estáticos
+/**
+ * Servidor HTTP para o middleware de arquivos estáticos.
+ * @type {http.Server}
  */
 const server = http.createServer((req, res) => {
     serve(req, res, () => {
@@ -41,8 +43,8 @@ const server = http.createServer((req, res) => {
     });
 });
 
-/** 
- * @description Inicia servidor de API e servidor de documentação, caso não esteja em modo de teste
+/**
+ * Inicia o servidor de API e o servidor de documentação (exceto em modo de teste).
  */
 if (process.env.NODE_ENV !== 'test') {
     app.listen(apiPort, () => {
@@ -54,8 +56,4 @@ if (process.env.NODE_ENV !== 'test') {
     });
 }
 
-/** 
- * @description Exporta objeto app para uso em outros módulos
- * @type {Object}
- */
 module.exports = app;
