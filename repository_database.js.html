@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: produtoController</title>
+    <title>JSDoc: Source: repository/database.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,96 +17,49 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: produtoController</h1>
+    <h1 class="page-title">Source: repository/database.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Configuração do banco de dados da aplicação.
+ * @module database
+ */
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">Módulo que contém as funções de controle para o recurso de produtos.</div>
-        
+const knex = require('knex');
 
-        
+/**
+ * Objeto de conexão com o banco de dados.
+ * @type {object}
+ * @const
+ * @namespace database
+ * @property {string} client - Cliente de banco de dados a ser utilizado (neste caso, PostgreSQL).
+ * @property {object} connection - Configurações de conexão com o banco de dados.
+ * @property {string} connection.host - Endereço do servidor de banco de dados.
+ * @property {number} connection.port - Porta de conexão com o servidor de banco de dados.
+ * @property {string} connection.user - Nome de usuário para autenticação no banco de dados.
+ * @property {string} connection.password - Senha para autenticação no banco de dados.
+ * @property {string} connection.database - Nome do banco de dados a ser utilizado.
+ */
+const db = knex({
+  client: 'pg',
+  connection: {
+    host: 'usladelfino.vps.webdock.cloud',
+    port: 5432,
+    user: 'postgres',
+    password: 'p0$tgr3$',
+    database: 'postgres'
+  }
+});
 
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="api_controllers_produtoController.js.html">api/controllers/produtoController.js</a>, <a href="api_controllers_produtoController.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = db;</code></pre>
+        </article>
+    </section>
 
 
 

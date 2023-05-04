@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: server</title>
+    <title>JSDoc: Module: index</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: server</h1>
+    <h1 class="page-title">Module: index</h1>
 
     
 
@@ -34,7 +34,7 @@
     <div class="container-overview">
     
         
-            <div class="description">server.js é o arquivo principal da aplicação</div>
+            <div class="description">Módulo principal da aplicação web.</div>
         
 
         
@@ -88,18 +88,6 @@
     
 
     
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li>module:http</li>
-        
-            <li>module:serve-static</li>
-        
-            <li>module:express</li>
-        
-            <li>module:produtoRoutes</li>
-        </ul>
-    
 
     
 
@@ -120,7 +108,7 @@
 
 
 <div class="description">
-    Porta utilizada pela API
+    Porta para a API. Pode ser definida pela variável de ambiente API_PORT ou padrão para 3000.
 </div>
 
 
@@ -168,7 +156,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line17">line 17</a>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -192,7 +180,7 @@
 
 
 <div class="description">
-    Porta utilizada pela documentação
+    Porta para o servidor de documentação. Pode ser definida pela variável de ambiente JSDOC_PORT ou padrão para 80.
 </div>
 
 
@@ -240,7 +228,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line19">line 19</a>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -264,7 +252,7 @@
 
 
 <div class="description">
-    Middleware que serve os arquivos estáticos da documentação
+    Middleware para servir arquivos estáticos da documentação JSDoc.
 </div>
 
 
@@ -312,7 +300,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line22">line 22</a>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line30">line 30</a>
     </li></ul></dd>
     
 
@@ -330,13 +318,13 @@
 
         
             
-<h4 class="name" id="~server"><span class="type-signature">(inner, constant) </span>server<span class="type-signature"> :Object</span></h4>
+<h4 class="name" id="~server"><span class="type-signature">(inner, constant) </span>server<span class="type-signature"> :http.Server</span></h4>
 
 
 
 
 <div class="description">
-    Cria servidor HTTP para lidar com as requisições de arquivos estáticos
+    Servidor HTTP para o middleware de arquivos estáticos.
 </div>
 
 
@@ -345,7 +333,7 @@
     <ul>
         <li>
             
-<span class="param-type">Object</span>
+<span class="param-type">http.Server</span>
 
 
         </li>
@@ -384,7 +372,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line33">line 33</a>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line39">line 39</a>
     </li></ul></dd>
     
 
@@ -418,13 +406,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-produtoController.html">produtoController</a></li><li><a href="module-routes_produtoRoutes.html">routes/produtoRoutes</a></li><li><a href="module-server.html">server</a></li></ul><h3>Classes</h3><ul><li><a href="Produto.html">Produto</a></li></ul><h3>Global</h3><ul><li><a href="global.html#lista_produtos">lista_produtos</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-database.html">database</a></li><li><a href="module-fornecedorController.html">fornecedorController</a></li><li><a href="module-fornecedorRouter.html">fornecedorRouter</a></li><li><a href="module-index.html">index</a></li><li><a href="module-produtoController.html">produtoController</a></li><li><a href="module-produtoRouter.html">produtoRouter</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-database-database.html">database</a></li><li><a href="module-fornecedorRouter-fornecedorRouter.html">fornecedorRouter</a></li><li><a href="module-produtoRouter-produtoRouter.html">produtoRouter</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createProduto">createProduto</a></li><li><a href="global.html#deleteProduto">deleteProduto</a></li><li><a href="global.html#fornecedorModel">fornecedorModel</a></li><li><a href="global.html#getProdutoById">getProdutoById</a></li><li><a href="global.html#getProdutos">getProdutos</a></li><li><a href="global.html#updateProduto">updateProduto</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon May 01 2023 19:04:12 GMT-0300 (Horário Padrão de Brasília)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu May 04 2023 00:04:41 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

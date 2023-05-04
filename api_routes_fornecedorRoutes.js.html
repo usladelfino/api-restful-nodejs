@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: api/routes/produtoRoutes.js</title>
+    <title>JSDoc: Source: api/routes/fornecedorRoutes.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: api/routes/produtoRoutes.js</h1>
+    <h1 class="page-title">Source: api/routes/fornecedorRoutes.js</h1>
 
     
 
@@ -27,93 +27,93 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Módulo de roteamento para lidar com requisições relacionadas a produtos.
- * @module produtoRouter
+ * Módulo de roteamento para lidar com requisições relacionadas a fornecedores.
+ * @module fornecedorRouter
  */
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const produtoController = require('../controllers/produtoController');
+const fornecedorController = require('../controllers/fornecedorController');
 
 /**
- * Router do Express para lidar com as rotas relacionadas a produtos.
+ * Router do Express para lidar com as rotas relacionadas a fornecedores.
  * @type {object}
  * @const
- * @namespace produtoRouter
+ * @namespace fornecedorRouter
  */
 const router = express.Router();
 
 /**
  * Middleware do body-parser para permitir requisições com formato JSON.
  * @function
- * @memberof produtoRouter
+ * @memberof fornecedorRouter
  */
 router.use(bodyParser.json());
 
 /**
- * Rota para buscar todos os produtos.
- * @name getProdutos
+ * Rota para buscar todos os fornecedores.
+ * @name getfornecedores
  * @function
- * @memberof produtoRouter
+ * @memberof fornecedorRouter
  * @inner
  * @param {Object} req - Objeto de requisição HTTP.
  * @param {Object} res - Objeto de resposta HTTP.
  * @param {function} next - Próxima função de middleware a ser executada.
- * @returns {Object[]} Array contendo todos os produtos.
+ * @returns {Object[]} Array contendo todos os fornecedores.
  */
-router.get('/produtos', produtoController.getProdutos);
+router.get('/fornecedores', fornecedorController.getFornecedores);
 
 /**
- * Rota para buscar um produto específico pelo ID.
- * @name getProdutoById
+ * Rota para buscar um fornecedor específico pelo ID.
+ * @name getfornecedorById
  * @function
- * @memberof produtoRouter
+ * @memberof fornecedorRouter
  * @inner
- * @param {Object} req - Objeto de requisição HTTP contendo o ID do produto.
+ * @param {Object} req - Objeto de requisição HTTP contendo o ID do fornecedor.
  * @param {Object} res - Objeto de resposta HTTP.
  * @param {function} next - Próxima função de middleware a ser executada.
- * @returns {Object} Objeto contendo informações do produto encontrado.
+ * @returns {Object} Objeto contendo informações do fornecedor encontrado.
  */
-router.get('/produtos/:id', produtoController.getProdutoById);
+router.get('/fornecedores/:id', fornecedorController.getFornecedorById);
 
 /**
- * Rota para criar um novo produto.
- * @name createProduto
+ * Rota para criar um novo fornecedor.
+ * @name createfornecedor
  * @function
- * @memberof produtoRouter
+ * @memberof fornecedorRouter
  * @inner
- * @param {Object} req - Objeto de requisição HTTP contendo informações do novo produto.
+ * @param {Object} req - Objeto de requisição HTTP contendo informações do novo fornecedor.
  * @param {Object} res - Objeto de resposta HTTP.
  * @param {function} next - Próxima função de middleware a ser executada.
- * @returns {Object} Objeto contendo informações do novo produto criado.
+ * @returns {Object} Objeto contendo informações do novo fornecedor criado.
  */
-router.post('/produtos', produtoController.createProduto);
+router.post('/fornecedores', fornecedorController.createFornecedor);
 
 /**
- * Rota para atualizar informações de um produto existente.
- * @name updateProduto
+ * Rota para atualizar informações de um fornecedor existente.
+ * @name updatefornecedor
  * @function
- * @memberof produtoRouter
+ * @memberof fornecedorRouter
  * @inner
- * @param {Object} req - Objeto de requisição HTTP contendo o ID do produto a ser atualizado e as informações a serem atualizadas.
+ * @param {Object} req - Objeto de requisição HTTP contendo o ID do fornecedor a ser atualizado e as informações a serem atualizadas.
  * @param {Object} res - Objeto de resposta HTTP.
  * @param {function} next - Próxima função de middleware a ser executada.
- * @returns {Object} Objeto contendo informações do produto atualizado.
+ * @returns {Object} Objeto contendo informações do fornecedor atualizado.
  */
-router.put('/produtos/:id', produtoController.updateProduto);
+router.put('/fornecedores/:id', fornecedorController.updateFornecedor);
 
 /**
- * Rota para excluir um produto existente.
- * @name deleteProduto
+ * Rota para excluir um fornecedor existente.
+ * @name deletefornecedor
  * @function
- * @memberof produtoRouter
+ * @memberof fornecedorRouter
  * @inner
- * @param {Object} req - Objeto de requisição HTTP contendo o ID do produto a ser excluído.
+ * @param {Object} req - Objeto de requisição HTTP contendo o ID do fornecedor a ser excluído.
  * @param {Object} res - Objeto de resposta HTTP.
  * @param {function} next - Próxima função de middleware a ser executada.
- * @returns {Object} Objeto contendo informações do produto excluído.
+ * @returns {Object} Objeto contendo informações do fornecedor excluído.
  */
-router.delete('/produtos/:id', produtoController.deleteProduto);
+router.delete('/fornecedores/:id', fornecedorController.deleteFornecedor);
 
 module.exports = router;</code></pre>
         </article>

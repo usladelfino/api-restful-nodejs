@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: api/controllers/produtoController.js</title>
+    <title>JSDoc: Source: api/controllers/fornecedorController.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: api/controllers/produtoController.js</h1>
+    <h1 class="page-title">Source: api/controllers/fornecedorController.js</h1>
 
     
 
@@ -27,28 +27,28 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Módulo que contém as funções de controle para o recurso de produtos.
- * @module produtoController
+ * Módulo que contém as funções de controle para o recurso de fornecedores.
+ * @module fornecedorController
  */
 
-const produtoModel = require('../models/produto');
+const fornecedorModel = require('../models/fornecedor');
 
-const produtoController = {
+const fornecedorController = {
 
   /**
-   * Método assíncrono que retorna todos os produtos
+   * Método assíncrono que retorna todos os fornecedores
    * @function
    * @async
-   * @name getProdutos
-   * @memberof ProdutoController
+   * @name getFornecedores
+   * @memberof FornecedorController
    * @param {Request} req - Objeto de requisição do Express
    * @param {Response} res - Objeto de resposta do Express
-   * @returns {Promise&lt;void>} - Não retorna nada, apenas envia uma resposta JSON com os produtos encontrados
+   * @returns {Promise&lt;void>} - Não retorna nada, apenas envia uma resposta JSON com os fornecedores encontrados
    */
-  getProdutos: async (req, res) => {
+  getFornecedores: async (req, res) => {
     try {
-      const produtos = await produtoModel.getProdutos();
-      res.json(produtos);
+      const fornecedores = await fornecedorModel.getFornecedores();
+      res.json(fornecedores);
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
@@ -56,94 +56,94 @@ const produtoController = {
   },
 
   /**
-   * Método assíncrono que retorna um produto específico
+   * Método assíncrono que retorna um fornecedor específico
    * @function
    * @async
-   * @name getProdutoById
-   * @memberof ProdutoController
+   * @name getFornecedorById
+   * @memberof FornecedorController
    * @param {Request} req - Objeto de requisição do Express
    * @param {Response} res - Objeto de resposta do Express
-   * @returns {Promise&lt;void>} - Não retorna nada, apenas envia uma resposta JSON com o produto encontrado ou uma mensagem de erro se o produto não for encontrado
+   * @returns {Promise&lt;void>} - Não retorna nada, apenas envia uma resposta JSON com o fornecedor encontrado ou uma mensagem de erro se o fornecedor não for encontrado
    */
-  getProdutoById: async (req, res) => {
+  getFornecedorById: async (req, res) => {
     const { id } = req.params;
     try {
-      const produto = await produtoModel.getProdutoById(id);
-      if (!produto) {
-        return res.status(404).send('Produto não encontrado');
+      const fornecedor = await fornecedorModel.getFornecedorById(id);
+      if (!fornecedor) {
+        return res.status(404).send('Fornecedor não encontrado');
       }
-      res.json(produto);
+      res.json(fornecedor);
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
     }
   },
   /**
-   * Método assíncrono que cria um novo produto
+   * Método assíncrono que cria um novo fornecedor
    * @function
    * @async
-   * @name createProduto
-   * @memberof ProdutoController
+   * @name createFornecedor
+   * @memberof FornecedorController
    * @param {Request} req - Objeto de requisição do Express
    * @param {Response} res - Objeto de resposta do Express
-   * @returns {Promise&lt;void>} - Não retorna nada, apenas envia uma resposta JSON com o produto criado ou uma mensagem de erro se ocorrer algum problema durante a criação
+   * @returns {Promise&lt;void>} - Não retorna nada, apenas envia uma resposta JSON com o fornecedor criado ou uma mensagem de erro se ocorrer algum problema durante a criação
    */
-  createProduto: async (req, res) => {
-    const produtoData = req.body;
+  createFornecedor: async (req, res) => {
+    const fornecedorData = req.body;
     try {
-      const produto = await produtoModel.createProduto(produtoData);
-      res.status(201).json(produto);
+      const fornecedor = await fornecedorModel.createFornecedor(fornecedorData);
+      res.status(201).json(fornecedor);
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
     }
   },
   /**
-   * Método assíncrono que atualiza um produto existente
+   * Método assíncrono que atualiza um fornecedor existente
    * @function
    * @async
-   * @name updateProduto
-   * @memberof ProdutoController
+   * @name updateFornecedor
+   * @memberof FornecedorController
    * @param {Request} req - Objeto de requisição do Express
    * @param {Response} res - Objeto de resposta do Express
-   * @returns {Promise&lt;void>} - Não retorna nada, apenas envia uma resposta JSON com o produto atualizado ou uma mensagem de erro se o produto não for encontrado
+   * @returns {Promise&lt;void>} - Não retorna nada, apenas envia uma resposta JSON com o fornecedor atualizado ou uma mensagem de erro se o fornecedor não for encontrado
    */
-  updateProduto: async (req, res) => {
+  updateFornecedor: async (req, res) => {
     const { id } = req.params;
-    const ProdutoData = req.body;
+    const FornecedorData = req.body;
     try {
-      const produto = await produtoModel.getProdutoById(id);
-      if (!produto) {
-        return res.status(404).send('Produto não encontrado');
+      const fornecedor = await fornecedorModel.getFornecedorById(id);
+      if (!fornecedor) {
+        return res.status(404).send('Fornecedor não encontrado');
       }
-      const updatedProduto = await produtoModel.updateProduto(id, ProdutoData);
-      res.json(updatedProduto);
+      const updatedFornecedor = await fornecedorModel.updateFornecedor(id, FornecedorData);
+      res.json(updatedFornecedor);
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
     }
   },
   /**
- * Método assíncrono que exclui um produto existente
+ * Método assíncrono que exclui um fornecedor existente
  * @function
  * @async
- * @name deleteProduto
- * @memberof ProdutoController
+ * @name deleteFornecedor
+ * @memberof FornecedorController
  * @param {Object} req - Objeto de solicitação HTTP
  * @param {Object} res - Objeto de resposta HTTP
- * @param {string} req.params.id - O ID do produto a ser excluído
+ * @param {string} req.params.id - O ID do fornecedor a ser excluído
  * @returns {Promise&lt;void>} - Retorna uma resposta HTTP sem conteúdo (204)
  * @throws {Error} - Retorna um erro se ocorrer um erro interno do servidor
  */
-  deleteProduto: async (req, res) => {
+  deleteFornecedor: async (req, res) => {
     const { id } = req.params;
     try {
-      const produto = await produtoModel.getProdutoById(id);
-      if (!produto) {
-        return res.status(404).send('Produto não encontrado');
+      const fornecedor = await fornecedorModel.getFornecedorById(id);
+      if (!fornecedor) {
+        return res.status(404).send('Fornecedor não encontrado');
       }
-      const deletedProduto = await produtoModel.deleteProduto(id);
-      res.status(204).json(deletedProduto);
+      const deletedFornecedor = await fornecedorModel.deleteFornecedor(id);
+      res.status(204).json(deletedFornecedor);
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
@@ -151,7 +151,7 @@ const produtoController = {
   }
 }
 
-module.exports = produtoController;
+module.exports = fornecedorController;
 </code></pre>
         </article>
     </section>
