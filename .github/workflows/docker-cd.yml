@@ -10,12 +10,6 @@ jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest # ou outra versão de SO suportada pelo Webdock
-    env:
-      DB_HOST: ${{ secrets.DB_HOST }}
-      DB_PORT: ${{ secrets.DB_PORT }}
-      DB_USER: ${{ secrets.DB_USER }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      DB_DATABASE: ${{ secrets.DB_DATABASE }}
       
     steps:
       - name: Checkout code
@@ -35,8 +29,8 @@ jobs:
           tags: usladelfino/api-restful-nodejs:latest    
           
       - name: Run tests
-        run: docker run usladelfino/api-restful-nodejs:latest npm test              
-          
+        run: docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_PORT=${{ secrets.DB_PORT }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }} usladelfino/api-restful-nodejs:latest npm test    
+      
       - name: Deploy to Webdock
         uses: appleboy/ssh-action@v0.1.10
         with:
