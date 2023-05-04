@@ -10,6 +10,7 @@ const produtoModel = {
      * Retorna uma lista de todos os produtos do banco de dados.
      * @async
      * @function getProdutos
+     * @memberof produtoModel
      * @returns {Promise<Array>} Array contendo todos os produtos.
      */
     getProdutos: async () => {
@@ -21,6 +22,7 @@ const produtoModel = {
      * Retorna um objeto produto correspondente ao ID informado.
      * @async
      * @function getProdutoById
+     * @memberof produtoModel
      * @param {number} id - ID do produto desejado.
      * @returns {Promise<Object>} Objeto produto correspondente ao ID informado.
      */
@@ -33,6 +35,7 @@ const produtoModel = {
      * Cria um novo produto no banco de dados com os dados informados.
      * @async
      * @function createProduto
+     * @memberof produtoModel
      * @param {Object} produtoData - Dados do novo produto.
      * @returns {Promise<Object>} Objeto produto criado no banco de dados.
      */
@@ -46,6 +49,7 @@ const produtoModel = {
      * Atualiza os dados de um produto correspondente ao ID informado.
      * @async
      * @function updateProduto
+     * @memberof produtoModel
      * @param {number} id - ID do produto a ser atualizado.
      * @param {Object} produtoData - Novos dados do produto.
      * @returns {Promise<Object>} Objeto produto atualizado no banco de dados.
@@ -60,6 +64,7 @@ const produtoModel = {
      * Remove um produto correspondente ao ID informado do banco de dados.
      * @async
      * @function deleteProduto
+     * @memberof produtoModel
      * @param {number} id - ID do produto a ser removido.
      * @returns {Promise<Object>} Objeto produto removido do banco de dados.
      */

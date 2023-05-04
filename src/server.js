@@ -1,6 +1,6 @@
 /**
  * Módulo principal da aplicação web.
- * @module index
+ * @module server
  */
 
 const http = require('http');
