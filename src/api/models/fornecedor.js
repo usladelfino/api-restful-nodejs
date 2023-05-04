@@ -7,19 +7,25 @@ const db = require('../../repository/database');
 
 /** @type {FornecedorModel} */
 const fornecedorModel = {
-    /**
-     * Retorna uma lista de todos os fornecedores cadastrados no banco de dados
-     * @returns {Promise<Object[]>} Lista de objetos contendo informações dos fornecedores
+   /**
+     * Retorna uma lista de todos os fornecedores do banco de dados.
+     * @async
+     * @function getFornecedores
+     * @memberof fornecedorModel
+     * @returns {Promise<Array>} Array contendo todos os fornecedores.
      */
     getFornecedores: async () => {
         const fornecedores = await db('fornecedor').select('*');
         return fornecedores;
     },
 
-    /**
-     * Retorna as informações do fornecedor com o id informado
-     * @param {number} id - Id do fornecedor
-     * @returns {Promise<Object>} Objeto contendo as informações do fornecedor
+     /**
+     * Retorna um objeto fornecedor correspondente ao ID informado.
+     * @async
+     * @function getFornecedorById
+     * @memberof fornecedorModel
+     * @param {number} id - ID do fornecedor desejado.
+     * @returns {Promise<Object>} Objeto fornecedor correspondente ao ID informado.
      */
     getFornecedorById: async (id) => {
         const fornecedor = await db('fornecedor').where({ id }).select('*').first();
@@ -27,9 +33,12 @@ const fornecedorModel = {
     },
 
     /**
-     * Insere um novo fornecedor no banco de dados
-     * @param {Object} fornecedorData - Objeto contendo as informações do novo fornecedor
-     * @returns {Promise<Object>} Objeto contendo as informações do novo fornecedor inserido no banco de dados
+     * Cria um novo fornecedor no banco de dados com os dados informados.
+     * @async
+     * @function createFornecedor
+     * @memberof fornecedorModel
+     * @param {Object} fornecedorData - Dados do novo fornecedor.
+     * @returns {Promise<Object>} Objeto fornecedor criado no banco de dados.
      */
     createFornecedor: async (fornecedorData) => {
         const [fornecedorId] = await db('fornecedor').insert(fornecedorData).returning("id");
@@ -37,11 +46,14 @@ const fornecedorModel = {
         return fornecedor;
     },
 
-    /**
-     * Atualiza as informações do fornecedor com o id informado
-     * @param {number} id - Id do fornecedor
-     * @param {Object} fornecedorData - Objeto contendo as novas informações do fornecedor
-     * @returns {Promise<Object>} Objeto contendo as informações atualizadas do fornecedor
+     /**
+     * Atualiza os dados de um fornecedor correspondente ao ID informado.
+     * @async
+     * @function updateFornecedor
+     * @memberof fornecedorModel
+     * @param {number} id - ID do fornecedor a ser atualizado.
+     * @param {Object} fornecedorData - Novos dados do fornecedor.
+     * @returns {Promise<Object>} Objeto fornecedor atualizado no banco de dados.
      */
     updateFornecedor: async (id, fornecedorData) => {
         await db('fornecedor').where({ id }).update(fornecedorData);
@@ -49,10 +61,13 @@ const fornecedorModel = {
         return fornecedor;
     },
 
-    /**
-     * Remove o fornecedor com o id informado do banco de dados
-     * @param {number} id - Id do fornecedor
-     * @returns {Promise<Object>} Objeto contendo as informações do fornecedor removido do banco de dados
+     /**
+     * Remove um fornecedor correspondente ao ID informado do banco de dados.
+     * @async
+     * @function deleteFornecedor
+     * @memberof fornecedorModel
+     * @param {number} id - ID do fornecedor a ser removido.
+     * @returns {Promise<Object>} Objeto fornecedor removido do banco de dados.
      */
     deleteFornecedor: async (id) => {
         const fornecedor = await db('fornecedor').where({ id }).select('*').first();
