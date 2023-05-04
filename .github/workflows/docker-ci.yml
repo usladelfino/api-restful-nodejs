@@ -34,6 +34,7 @@ jobs:
           context: .
           push: true
           tags: usladelfino/api-restful-nodejs:latest
+          builder: docker
           build-args: |
             DOCKER_BUILDKIT= ${{ env.DOCKER_BUILDKIT }}
             DOCKER_COMPOSE_VERSION= ${{ env.DOCKER_COMPOSE_VERSION }}
