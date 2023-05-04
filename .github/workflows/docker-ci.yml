@@ -36,4 +36,4 @@ jobs:
             DB_DATABASE=${{ secrets.DB_DATABASE }}
       
       - name: Run tests
-        run: docker run usladelfino/api-restful-nodejs:latest npm test
+        run: docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_PORT=${{ secrets.DB_PORT }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }} usladelfino/api-restful-nodejs:latest npm test
