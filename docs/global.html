@@ -98,14 +98,10 @@
 
         
             
-<h4 class="name" id="lista_produtos"><span class="type-signature">(constant) </span>lista_produtos<span class="type-signature"> :<a href="global.html#ListaProdutos">ListaProdutos</a></span></h4>
+<h4 class="name" id="fornecedorModel"><span class="type-signature">(constant) </span>fornecedorModel<span class="type-signature"> :<a href="global.html#FornecedorModel">FornecedorModel</a></span></h4>
 
 
 
-
-<div class="description">
-    Objeto que representa uma lista de produtos.
-</div>
 
 
 
@@ -113,7 +109,7 @@
     <ul>
         <li>
             
-<span class="param-type"><a href="global.html#ListaProdutos">ListaProdutos</a></span>
+<span class="param-type"><a href="global.html#FornecedorModel">FornecedorModel</a></span>
 
 
         </li>
@@ -152,7 +148,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_produto.js.html">models/produto.js</a>, <a href="models_produto.js.html#line29">line 29</a>
+        <a href="api_models_fornecedor.js.html">api/models/fornecedor.js</a>, <a href="api_models_fornecedor.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -172,42 +168,37 @@
     
 
     
-
-    
-        <h3 class="subsection-title">Type Definitions</h3>
+        <h3 class="subsection-title">Methods</h3>
 
         
-                
-<h4 class="name" id="ListaProdutos">ListaProdutos</h4>
+            
 
+    
+
+    
+    <h4 class="name" id="createProduto"><span class="type-signature">(async) </span>createProduto<span class="signature">(produtoData)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
 
 
 
 <div class="description">
-    Objeto contendo a lista de produtos.
+    Cria um novo produto no banco de dados com os dados informados.
 </div>
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
 
 
 
 
 
-    <h5 class="subsection-title">Properties:</h5>
 
+    <h5>Parameters:</h5>
     
 
-<table class="props">
+<table class="params">
     <thead>
     <tr>
         
@@ -229,13 +220,13 @@
 
         <tr>
             
-                <td class="name"><code>produtos</code></td>
+                <td class="name"><code>produtoData</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;<a href="Produto.html">Produto</a>></span>
+<span class="param-type">Object</span>
 
 
             
@@ -245,12 +236,14 @@
 
             
 
-            <td class="description last">Array de produtos.</td>
+            <td class="description last">Dados do novo produto.</td>
         </tr>
 
     
     </tbody>
 </table>
+
+
 
 
 
@@ -284,7 +277,803 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="models_produto.js.html">models/produto.js</a>, <a href="models_produto.js.html#line19">line 19</a>
+        <a href="api_models_produto.js.html">api/models/produto.js</a>, <a href="api_models_produto.js.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Objeto produto criado no banco de dados.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deleteProduto"><span class="type-signature">(async) </span>deleteProduto<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Remove um produto correspondente ao ID informado do banco de dados.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID do produto a ser removido.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_models_produto.js.html">api/models/produto.js</a>, <a href="api_models_produto.js.html#line59">line 59</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Objeto produto removido do banco de dados.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getProdutoById"><span class="type-signature">(async) </span>getProdutoById<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Retorna um objeto produto correspondente ao ID informado.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID do produto desejado.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_models_produto.js.html">api/models/produto.js</a>, <a href="api_models_produto.js.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Objeto produto correspondente ao ID informado.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getProdutos"><span class="type-signature">(async) </span>getProdutos<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Retorna uma lista de todos os produtos do banco de dados.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_models_produto.js.html">api/models/produto.js</a>, <a href="api_models_produto.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Array contendo todos os produtos.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateProduto"><span class="type-signature">(async) </span>updateProduto<span class="signature">(id, produtoData)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Atualiza os dados de um produto correspondente ao ID informado.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID do produto a ser atualizado.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>produtoData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Novos dados do produto.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_models_produto.js.html">api/models/produto.js</a>, <a href="api_models_produto.js.html#line45">line 45</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Objeto produto atualizado no banco de dados.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="FornecedorModel">FornecedorModel</h4>
+
+
+
+
+<div class="description">
+    Objeto com funções relacionadas a operações de persistência da tabela de fornecedores
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_models_fornecedor.js.html">api/models/fornecedor.js</a>, <a href="api_models_fornecedor.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="ProdutoModel">ProdutoModel</h4>
+
+
+
+
+<div class="description">
+    Objeto com funções relacionadas a operações de persistência da tabela de produtos
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="api_models_produto.js.html">api/models/produto.js</a>, <a href="api_models_produto.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -314,13 +1103,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-produtoController.html">produtoController</a></li><li><a href="module-routes_produtoRoutes.html">routes/produtoRoutes</a></li><li><a href="module-server.html">server</a></li></ul><h3>Classes</h3><ul><li><a href="Produto.html">Produto</a></li></ul><h3>Global</h3><ul><li><a href="global.html#lista_produtos">lista_produtos</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-database.html">database</a></li><li><a href="module-fornecedorController.html">fornecedorController</a></li><li><a href="module-fornecedorRouter.html">fornecedorRouter</a></li><li><a href="module-index.html">index</a></li><li><a href="module-produtoController.html">produtoController</a></li><li><a href="module-produtoRouter.html">produtoRouter</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-database-database.html">database</a></li><li><a href="module-fornecedorRouter-fornecedorRouter.html">fornecedorRouter</a></li><li><a href="module-produtoRouter-produtoRouter.html">produtoRouter</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createProduto">createProduto</a></li><li><a href="global.html#deleteProduto">deleteProduto</a></li><li><a href="global.html#fornecedorModel">fornecedorModel</a></li><li><a href="global.html#getProdutoById">getProdutoById</a></li><li><a href="global.html#getProdutos">getProdutos</a></li><li><a href="global.html#updateProduto">updateProduto</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon May 01 2023 19:04:12 GMT-0300 (Horário Padrão de Brasília)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed May 03 2023 21:01:14 GMT-0300 (Horário Padrão de Brasília)
 </footer>
 
 <script> prettyPrint(); </script>
