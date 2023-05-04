@@ -35,19 +35,25 @@ const db = require('../../repository/database');
 
 /** @type {FornecedorModel} */
 const fornecedorModel = {
-    /**
-     * Retorna uma lista de todos os fornecedores cadastrados no banco de dados
-     * @returns {Promise&lt;Object[]>} Lista de objetos contendo informações dos fornecedores
+   /**
+     * Retorna uma lista de todos os fornecedores do banco de dados.
+     * @async
+     * @function getFornecedores
+     * @memberof fornecedorModel
+     * @returns {Promise&lt;Array>} Array contendo todos os fornecedores.
      */
     getFornecedores: async () => {
         const fornecedores = await db('fornecedor').select('*');
         return fornecedores;
     },
 
-    /**
-     * Retorna as informações do fornecedor com o id informado
-     * @param {number} id - Id do fornecedor
-     * @returns {Promise&lt;Object>} Objeto contendo as informações do fornecedor
+     /**
+     * Retorna um objeto fornecedor correspondente ao ID informado.
+     * @async
+     * @function getFornecedorById
+     * @memberof fornecedorModel
+     * @param {number} id - ID do fornecedor desejado.
+     * @returns {Promise&lt;Object>} Objeto fornecedor correspondente ao ID informado.
      */
     getFornecedorById: async (id) => {
         const fornecedor = await db('fornecedor').where({ id }).select('*').first();
@@ -55,9 +61,12 @@ const fornecedorModel = {
     },
 
     /**
-     * Insere um novo fornecedor no banco de dados
-     * @param {Object} fornecedorData - Objeto contendo as informações do novo fornecedor
-     * @returns {Promise&lt;Object>} Objeto contendo as informações do novo fornecedor inserido no banco de dados
+     * Cria um novo fornecedor no banco de dados com os dados informados.
+     * @async
+     * @function createFornecedor
+     * @memberof fornecedorModel
+     * @param {Object} fornecedorData - Dados do novo fornecedor.
+     * @returns {Promise&lt;Object>} Objeto fornecedor criado no banco de dados.
      */
     createFornecedor: async (fornecedorData) => {
         const [fornecedorId] = await db('fornecedor').insert(fornecedorData).returning("id");
@@ -65,11 +74,14 @@ const fornecedorModel = {
         return fornecedor;
     },
 
-    /**
-     * Atualiza as informações do fornecedor com o id informado
-     * @param {number} id - Id do fornecedor
-     * @param {Object} fornecedorData - Objeto contendo as novas informações do fornecedor
-     * @returns {Promise&lt;Object>} Objeto contendo as informações atualizadas do fornecedor
+     /**
+     * Atualiza os dados de um fornecedor correspondente ao ID informado.
+     * @async
+     * @function updateFornecedor
+     * @memberof fornecedorModel
+     * @param {number} id - ID do fornecedor a ser atualizado.
+     * @param {Object} fornecedorData - Novos dados do fornecedor.
+     * @returns {Promise&lt;Object>} Objeto fornecedor atualizado no banco de dados.
      */
     updateFornecedor: async (id, fornecedorData) => {
         await db('fornecedor').where({ id }).update(fornecedorData);
@@ -77,10 +89,13 @@ const fornecedorModel = {
         return fornecedor;
     },
 
-    /**
-     * Remove o fornecedor com o id informado do banco de dados
-     * @param {number} id - Id do fornecedor
-     * @returns {Promise&lt;Object>} Objeto contendo as informações do fornecedor removido do banco de dados
+     /**
+     * Remove um fornecedor correspondente ao ID informado do banco de dados.
+     * @async
+     * @function deleteFornecedor
+     * @memberof fornecedorModel
+     * @param {number} id - ID do fornecedor a ser removido.
+     * @returns {Promise&lt;Object>} Objeto fornecedor removido do banco de dados.
      */
     deleteFornecedor: async (id) => {
         const fornecedor = await db('fornecedor').where({ id }).select('*').first();
@@ -99,13 +114,13 @@ module.exports = fornecedorModel;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-database.html">database</a></li><li><a href="module-fornecedorController.html">fornecedorController</a></li><li><a href="module-fornecedorRouter.html">fornecedorRouter</a></li><li><a href="module-index.html">index</a></li><li><a href="module-produtoController.html">produtoController</a></li><li><a href="module-produtoRouter.html">produtoRouter</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-database-database.html">database</a></li><li><a href="module-fornecedorRouter-fornecedorRouter.html">fornecedorRouter</a></li><li><a href="module-produtoRouter-produtoRouter.html">produtoRouter</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createProduto">createProduto</a></li><li><a href="global.html#deleteProduto">deleteProduto</a></li><li><a href="global.html#fornecedorModel">fornecedorModel</a></li><li><a href="global.html#getProdutoById">getProdutoById</a></li><li><a href="global.html#getProdutos">getProdutos</a></li><li><a href="global.html#updateProduto">updateProduto</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-database.html">database</a></li><li><a href="module-fornecedorController.html">fornecedorController</a></li><li><a href="module-fornecedorRouter.html">fornecedorRouter</a></li><li><a href="module-produtoController.html">produtoController</a></li><li><a href="module-produtoRouter.html">produtoRouter</a></li><li><a href="module-server.html">server</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-database-database.html">database</a></li><li><a href="module-fornecedorRouter-fornecedorRouter.html">fornecedorRouter</a></li><li><a href="module-produtoRouter-produtoRouter.html">produtoRouter</a></li></ul><h3>Global</h3><ul><li><a href="global.html#fornecedorModel">fornecedorModel</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed May 03 2023 21:01:14 GMT-0300 (Horário Padrão de Brasília)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed May 03 2023 21:17:21 GMT-0300 (Horário Padrão de Brasília)
 </footer>
 
 <script> prettyPrint(); </script>
