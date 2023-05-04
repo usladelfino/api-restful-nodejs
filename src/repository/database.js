@@ -4,6 +4,7 @@
  */
 
 const knex = require('knex');
+require('dotenv').config();
 
 /**
  * Objeto de conexão com o banco de dados.
@@ -21,11 +22,11 @@ const knex = require('knex');
 const db = knex({
   client: 'pg',
   connection: {
-    host: 'usladelfino.vps.webdock.cloud',
-    port: 5432,
-    user: 'postgres',
-    password: 'p0$tgr3$',
-    database: 'postgres'
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
   }
 });
 
