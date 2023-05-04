@@ -40,11 +40,11 @@ jobs:
         env:
           DOCKER_BUILDKIT: ${{ env.DOCKER_BUILDKIT }}
           DOCKER_COMPOSE_VERSION: ${{ env.DOCKER_COMPOSE_VERSION }}
-          DB_HOST: ${{ secrest.DB_HOST }}
-          DB_PORT: ${{ secrest.DB_PORT }}
-          DB_USER: ${{ secrest.DB_USER }}
-          DB_PASSWORD: ${{ secrest.DB_PASSWORD }}
-          DB_DATABASE: ${{ secrest.DB_DATABASE }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_DATABASE: ${{ secrets.DB_DATABASE }}
 
       - name: Run tests
         run: docker run usladelfino/api-restful-nodejs:latest npm test
