@@ -17,7 +17,7 @@ jobs:
       - name: Install JSDoc
         run: npm install -g jsdoc
       - name: Generate documentation
-        run: npm run docs
+        run: jsdoc -c jsdoc.json
       - name: Deploy documentation
         uses: peaceiris/actions-gh-pages@v3
         with:
