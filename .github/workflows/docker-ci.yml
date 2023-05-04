@@ -6,6 +6,14 @@ on:
     branches: ["main", "develop"]
     types:
       - completed    
+
+env:
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_PORT: ${{ secrets.DB_PORT }}
+  DB_USER: ${{ secrets.DB_USER }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_DATABASE: ${{ secrets.DB_DATABASE }}
+  
 jobs:
   build-and-test:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -22,19 +30,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           
       - name: Build Docker image
-        env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_DATABASE: ${{ secrets.DB_DATABASE }}
-        run: docker build -t usladelfino/api-restful-nodejs:latest --build-arg DB_HOST=$DB_HOST --build-arg DB_PORT=$DB_PORT --build-arg DB_USER=$DB_USER --build-arg DB_PASSWORD=$DB_PASSWORD --build-arg DB_DATABASE=$DB_DATABASE .
+        run: docker build -t usladelfino/api-restful-nodejs:latest --build-arg DB_HOST=${{ env.DB_HOST }} --build-arg DB_PORT=${{ env.DB_PORT }} --build-arg DB_USER=${{ env.DB_USER }} --build-arg DB_PASSWORD=${{ env.DB_PASSWORD }} --build-arg DB_DATABASE=${{ env.DB_DATABASE }} .
 
       - name: Run tests
-        env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_DATABASE: ${{ secrets.DB_DATABASE }}
-        run: docker run -e DB_HOST=$DB_HOST -e DB_PORT=$DB_PORT -e DB_USER=$DB_USER -e DB_PASSWORD=$DB_PASSWORD -e DB_DATABASE=$DB_DATABASE usladelfino/api-restful-nodejs:latest npm test
+        run: docker run -e DB_HOST=${{ env.DB_HOST }} -e DB_PORT=${{ env.DB_PORT }} -e DB_USER=${{ env.DB_USER }} -e DB_PASSWORD=${{ env.DB_PASSWORD }} -e DB_DATABASE=${{ env.DB_DATABASE }} usladelfino/api-restful-nodejs:latest npm test
+        
