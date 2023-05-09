@@ -46,7 +46,7 @@ jobs:
             docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_PORT=${{ secrets.DB_PORT }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }}  -d --name api-restful-nodejs -p 3000:3000 usladelfino/api-restful-nodejs:latest
             docker system prune -f
       - name: Create Tag
-        uses: anothrNick/github-tag-action@v1.9.1
+        uses: anothrNick/github-tag-action@1.61.0
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           tag_name: v1.0.${{ github.run_number }}
