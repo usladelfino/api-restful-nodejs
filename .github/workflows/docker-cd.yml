@@ -46,30 +46,28 @@ jobs:
             docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_PORT=${{ secrets.DB_PORT }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }}  -d --name api-restful-nodejs -p 3000:3000 usladelfino/api-restful-nodejs:latest
             docker system prune -f
             
+      - name: Create tag
+        run: |
+          version=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v1.0.0")
+          version=${version#v}
+          versionArray=(${version//./ })
+          major=${versionArray[0]}
+          minor=${versionArray[1]}
+          patch=${versionArray[2]}
+          tag="v${major}.${minor}.$((patch+1))"
+          git tag $tag
+          git push origin $tag
+
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.version.outputs.semver }}
-          release_name: Release ${{ steps.version.outputs.semver }}
-          body: This is an automatic release for version ${{ steps.version.outputs.semver }}.
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Release ${{ github.ref }}
           draft: false
           prerelease: false
-
-      - name: Get latest commit SHA
-        run: echo ::set-output name=sha::$(git rev-parse HEAD)
-
-      - name: Create Git tag
-        id: create_tag
-        run: git tag ${{ steps.version.outputs.semver }}
-        env:
-          GITHUB_REF: refs/tags/${{ steps.version.outputs.semver }}
-
-      - name: Push Git tag
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tags: ${{ steps.version.outputs.semver }}
             
