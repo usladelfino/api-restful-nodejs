@@ -46,47 +46,18 @@ jobs:
             docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_PORT=${{ secrets.DB_PORT }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }}  -d --name api-restful-nodejs -p 3000:3000 usladelfino/api-restful-nodejs:latest
             docker system prune -f
             
-      - name: Create tag
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v1.0.0")
-          if [[ $latest_tag == v* ]]; then
-            IFS='.' read -ra TAG_VERSION <<< "${latest_tag#v}"
-            major=${TAG_VERSION[0]}
-            minor=${TAG_VERSION[1]}
-            patch=${TAG_VERSION[2]}
-            new_tag="v${major}.${minor}.$((patch+1))"
-          else
-            new_tag="v1.0.0"
-          fi
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-
-          if git rev-parse $new_tag >/dev/null 2>&1; then
-            IFS='.' read -ra TAG_VERSION <<< "${new_tag#v}"
-            major=${TAG_VERSION[0]}
-            minor=${TAG_VERSION[1]}
-            patch=${TAG_VERSION[2]}
-            new_tag="v${major}.${minor}.$((patch+1))"
-          fi
-
-          git tag $new_tag
-          git push origin $new_tag
-          echo "Tag $new_tag created and pushed successfully"
-
-            
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.create_tag.outputs.tag_name }}
-          release_name: Release ${{ steps.create_tag.outputs.tag_name }}
+          tag_name: $(git tag --sort=v:refname | tail -1)
+          release_name: Release $(git tag --sort=v:refname | tail -1)
           body: |
-            Release ${{ steps.create_tag.outputs.tag_name }}
+            Release $(git tag --sort=v:refname | tail -1)
           draft: false
           prerelease: false
+
 
             
