@@ -47,6 +47,8 @@ jobs:
             docker system prune -f
             
       - name: Create tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           version=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v1.0.0")
           version=${version#v}
