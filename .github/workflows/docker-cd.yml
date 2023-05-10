@@ -51,6 +51,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v1.0.0")
+          echo "latest tag: $latest_tag"
           if [[ $latest_tag == v* ]]; then
             IFS='.' read -ra TAG_VERSION <<< "${latest_tag#v}"
             major=${TAG_VERSION[0]}
