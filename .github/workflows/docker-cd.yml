@@ -50,22 +50,31 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v1.0.0")
-            if [[ $latest_tag == v* ]]; then
-              IFS='.' read -ra TAG_VERSION <<< "${latest_tag#v}"
-              major=${TAG_VERSION[0]}
-              minor=${TAG_VERSION[1]}
-              patch=${TAG_VERSION[2]}
-              new_tag="v${major}.${minor}.$((patch+1))-next"
-            else
-              new_tag="v1.0.0"
-            fi
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
+          latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v1.0.0")
+          if [[ $latest_tag == v* ]]; then
+            IFS='.' read -ra TAG_VERSION <<< "${latest_tag#v}"
+            major=${TAG_VERSION[0]}
+            minor=${TAG_VERSION[1]}
+            patch=${TAG_VERSION[2]}
+            new_tag="v${major}.${minor}.$((patch+1))"
+          else
+            new_tag="v1.0.0"
+          fi
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
 
-            git tag $new_tag
-            git push origin $new_tag
-            echo "Tag $new_tag created and pushed successfully"
+          if git rev-parse $new_tag >/dev/null 2>&1; then
+            IFS='.' read -ra TAG_VERSION <<< "${new_tag#v}"
+            major=${TAG_VERSION[0]}
+            minor=${TAG_VERSION[1]}
+            patch=${TAG_VERSION[2]}
+            new_tag="v${major}.${minor}.$((patch+1))"
+          fi
+
+          git tag $new_tag
+          git push origin $new_tag
+          echo "Tag $new_tag created and pushed successfully"
+
             
       - name: Create release
         id: create_release
