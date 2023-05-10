@@ -60,6 +60,8 @@ jobs:
           else
             new_tag="v1.0.0"
           fi
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git tag $new_tag
           git push origin $new_tag
 
@@ -67,7 +69,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
