@@ -48,17 +48,20 @@ jobs:
             
       - name: Create tag
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          version=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v1.0.0")
-          version=${version#v}
-          versionArray=(${version//./ })
-          major=${versionArray[0]}
-          minor=${versionArray[1]}
-          patch=${versionArray[2]}
-          tag="v${major}.${minor}.$((patch+1))"
-          git tag $tag
-          git push origin $tag
+          latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v1.0.0")
+          if [[ $latest_tag == v* ]]; then
+            IFS='.' read -ra TAG_VERSION <<< "${latest_tag#v}"
+            major=${TAG_VERSION[0]}
+            minor=${TAG_VERSION[1]}
+            patch=${TAG_VERSION[2]}
+            new_tag="v${major}.${minor}.$((patch+1))"
+          else
+            new_tag="v1.0.0"
+          fi
+          git tag $new_tag
+          git push origin $new_tag
 
       - name: Create release
         id: create_release
