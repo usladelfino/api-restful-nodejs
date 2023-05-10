@@ -52,11 +52,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: $(git describe --tags --abbrev=0)
-          release_name: Release $(git describe --tags --abbrev=0)
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
           body: |
-            Release $(git describe --tags --abbrev=0)
+            Release ${{ github.ref }}
           draft: false
           prerelease: false
+
 
             
