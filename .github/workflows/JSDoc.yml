@@ -3,7 +3,7 @@ name: JSDoc
 on:
   workflow_run:
     workflows: ["Node.js CI"]
-    branches: ["main", "develop"]
+    branches: ["main"]
     types:
       - completed   
 
