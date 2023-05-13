@@ -3,9 +3,9 @@
  * @module server
  */
 
-const http = require('http');
-const serveStatic = require('serve-static');
 const express = require('express');
+const cors = require('cors');
+const path = require ('path');
 const produtoRoutes = require('./api/routes/produtoRoutes');
 const fornecedorRoutes = require('./api/routes/fornecedorRoutes');
 
@@ -17,31 +17,14 @@ const app = express();
  */
 const apiPort = process.env.API_PORT || 3000;
 
-/**
- * Porta para o servidor de documentação. Pode ser definida pela variável de ambiente JSDOC_PORT ou padrão para 80.
- * @type {number}
- */
-const jsdocPort = process.env.JSDOC_PORT || 80;
 
-/**
- * Middleware para servir arquivos estáticos da documentação JSDoc.
- * @type {function}
- */
-const serve = serveStatic('./docs', { 'index': ['index.html'] });
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+app.use('/app', express.static (path.join (__dirname, '/public')));
 app.use('/api', produtoRoutes);
 app.use('/api', fornecedorRoutes);
-
-/**
- * Servidor HTTP para o middleware de arquivos estáticos.
- * @type {http.Server}
- */
-const server = http.createServer((req, res) => {
-    serve(req, res, () => {
-        res.statusCode = 404;
-        res.end('404 Not Found');
-    });
-});
 
 /**
  * Inicia o servidor de API e o servidor de documentação (exceto em modo de teste).
@@ -49,10 +32,6 @@ const server = http.createServer((req, res) => {
 if (process.env.NODE_ENV !== 'test') {
     app.listen(apiPort, () => {
         console.log(`Servidor de API iniciado na porta ${apiPort}`);
-    });
-
-    server.listen(jsdocPort, () => {
-        console.log(`Servidor de documentação iniciado na porta ${jsdocPort}`);
     });
 }
 
