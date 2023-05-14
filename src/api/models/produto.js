@@ -40,10 +40,15 @@ const produtoModel = {
      * @returns {Promise<Object>} Objeto produto criado no banco de dados.
      */
     createProduto: async (produtoData) => {
+        await db('produto').insert(produtoData);
+        const produto = await db('produto').where(produtoData).first();
+        return produto;
+    },
+    /*createProduto: async (produtoData) => {
         const [produtoId] = await db('produto').insert(produtoData).returning("id");
         const produto = await db('produto').where({ id: produtoId.id }).select('*').first();
         return produto;
-    },
+    },*/
 
     /**
      * Atualiza os dados de um produto correspondente ao ID informado.

@@ -41,8 +41,8 @@ const fornecedorModel = {
      * @returns {Promise<Object>} Objeto fornecedor criado no banco de dados.
      */
     createFornecedor: async (fornecedorData) => {
-        const [fornecedorId] = await db('fornecedor').insert(fornecedorData).returning("id");
-        const fornecedor = await db('fornecedor').where({ id: fornecedorId.id }).select('*').first();
+        await db('fornecedor').insert(fornecedorData);
+        const fornecedor = await db('fornecedor').where(fornecedorData).first();
         return fornecedor;
     },
 

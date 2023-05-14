@@ -27,7 +27,7 @@ jobs:
           tags: usladelfino/api-restful-nodejs:latest    
           
       - name: Run tests
-        run: docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_PORT=${{ secrets.DB_PORT }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }} usladelfino/api-restful-nodejs:latest npm test    
+        run: docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }} usladelfino/api-restful-nodejs:latest npm test    
       
       - name: Deploy to Webdock
         uses: appleboy/ssh-action@v0.1.10
@@ -41,7 +41,7 @@ jobs:
               docker stop api-restful-nodejs || true
               docker rm api-restful-nodejs || true
             fi
-            docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_PORT=${{ secrets.DB_PORT }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }}  -d --restart always --name api-restful-nodejs -p 3000:3000 usladelfino/api-restful-nodejs:latest
+            docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }}  -d --restart always --name api-restful-nodejs -p 3000:3000 usladelfino/api-restful-nodejs:latest
             docker system prune -f
                 
       - name: Create release
