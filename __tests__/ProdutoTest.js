@@ -15,7 +15,7 @@ describe('Testes de integração para o recurso de Produto', () => {
 
     expect(response.status).toBe(201);
     expect(response.body.descricao).toBe('produto de teste');
-    expect(response.body.valor).toBe("9.99");
+    expect(response.body.valor).toBe('9.99');
     expect(response.body.marca).toBe('Genérico');
     expect(response.body).toHaveProperty('id');
 
