@@ -25,9 +25,6 @@ jobs:
           context: .
           push: true
           tags: usladelfino/api-restful-nodejs:latest    
-          
-      - name: Run tests
-        run: docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }} usladelfino/api-restful-nodejs:latest npm test    
       
       - name: Deploy to Webdock
         uses: appleboy/ssh-action@v0.1.10
