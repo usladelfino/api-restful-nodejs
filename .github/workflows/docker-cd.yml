@@ -38,7 +38,7 @@ jobs:
               docker stop api-restful-nodejs || true
               docker rm api-restful-nodejs || true
             fi
-            docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }}  -d --restart always --name api-restful-nodejs -p 3000:3000 usladelfino/api-restful-nodejs:latest
+            docker run --env DB_HOST=${{ secrets.DB_HOST }} --env DB_USER=${{ secrets.DB_USER }} --env DB_PASSWORD=${{ secrets.DB_PASSWORD }} --env DB_DATABASE=${{ secrets.DB_DATABASE }} --env SECRET_KEY=${{ secrets.SECRET_KEY }}  -d --restart always --name api-restful-nodejs -p 3000:3000 usladelfino/api-restful-nodejs:latest
             docker system prune -f
                 
       - name: Create release
