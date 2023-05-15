@@ -22,8 +22,7 @@ const produtoController = {
       const produtos = await produtoModel.getProdutos();
       res.json(produtos);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({message: 'Erro ao consultar produtos - ' + err.message })
     }
   },
 
@@ -46,8 +45,7 @@ const produtoController = {
       }
       res.json(produto);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({message: 'Erro ao consultar produto - ' + err.message })
     }
   },
   /**
@@ -66,8 +64,7 @@ const produtoController = {
       const produto = await produtoModel.createProduto(produtoData);
       res.status(201).json(produto);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({message: 'Erro ao cadastrar produto - ' + err.message })
     }
   },
   /**
@@ -91,8 +88,7 @@ const produtoController = {
       const updatedProduto = await produtoModel.updateProduto(id, ProdutoData);
       res.json(updatedProduto);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({message: 'Erro ao editar produto - ' + err.message })
     }
   },
   /**
@@ -117,8 +113,7 @@ const produtoController = {
       const deletedProduto = await produtoModel.deleteProduto(id);
       res.status(204).json(deletedProduto);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({message: 'Erro ao excluir produto - ' + err.message })
     }
   }
 }

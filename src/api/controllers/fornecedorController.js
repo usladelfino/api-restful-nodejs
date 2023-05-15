@@ -22,8 +22,7 @@ const fornecedorController = {
       const fornecedores = await fornecedorModel.getFornecedores();
       res.json(fornecedores);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({message: 'Erro ao consultar fornecedores - ' + err.message })
     }
   },
 
@@ -46,8 +45,7 @@ const fornecedorController = {
       }
       res.json(fornecedor);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({message: 'Erro ao consultar fornecedor - ' + err.message })
     }
   },
   /**
@@ -66,8 +64,7 @@ const fornecedorController = {
       const fornecedor = await fornecedorModel.createFornecedor(fornecedorData);
       res.status(201).json(fornecedor);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({message: 'Erro ao cadastrar fornecedor - ' + err.message })
     }
   },
   /**
@@ -91,8 +88,7 @@ const fornecedorController = {
       const updatedFornecedor = await fornecedorModel.updateFornecedor(id, FornecedorData);
       res.json(updatedFornecedor);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({message: 'Erro ao editar dados do fornecedor - ' + err.message })
     }
   },
   /**
@@ -117,8 +113,7 @@ const fornecedorController = {
       const deletedFornecedor = await fornecedorModel.deleteFornecedor(id);
       res.status(204).json(deletedFornecedor);
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({message: 'Erro ao excluir fornecedor - ' + err.message })
     }
   }
 }

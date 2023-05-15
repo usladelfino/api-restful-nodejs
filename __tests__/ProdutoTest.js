@@ -5,8 +5,16 @@ describe('Testes de integração para o recurso de Produto', () => {
   let produtoId = null;
 
   it('Deve cadastrar um novo produto', async () => {
+    const login = await request(app)
+      .post('/api/seguranca/login')
+      .send({
+        login: 'admin',
+        senha: '1234'
+      });
+
     const response = await request(app)
       .post('/api/produtos')
+      .auth(login.body.token, {type: "bearer"})
       .send({
         descricao: 'produto de teste',
         valor: 9.99,
@@ -23,16 +31,30 @@ describe('Testes de integração para o recurso de Produto', () => {
   });
 
   it('Deve listar todos os produtos', async () => {
-    const response = await request(app).get('/api/produtos');
+    const login = await request(app)
+    .post('/api/seguranca/login')
+    .send({
+      login: 'usladelfino',
+      senha: '1234'
+    });
+
+    const response = await request(app).get('/api/produtos').auth(login.body.token, {type: "bearer"});
 
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Array);
     expect(response.body.length).toBeGreaterThan(0);
   });
 
-  
+
   it('Deve buscar um produto pelo ID', async () => {
-    const response = await request(app).get(`/api/produtos/${produtoId}`);
+    const login = await request(app)
+      .post('/api/seguranca/login')
+      .send({
+        login: 'usladelfino',
+        senha: '1234'
+      });
+
+    const response = await request(app).get(`/api/produtos/${produtoId}`).auth(login.body.token, {type: "bearer"});
 
     expect(response.status).toBe(200);
     expect(response.body.descricao).toBe('produto de teste');
@@ -42,8 +64,16 @@ describe('Testes de integração para o recurso de Produto', () => {
   });
 
   it('Deve atualizar um produto pelo ID', async () => {
+    const login = await request(app)
+      .post('/api/seguranca/login')
+      .send({
+        login: 'admin',
+        senha: '1234'
+      });
+
     const response = await request(app)
       .put(`/api/produtos/${produtoId}`)
+      .auth(login.body.token, {type: "bearer"})
       .send({
         descricao: 'produto de teste alterado',
         valor: 10.99,
@@ -58,7 +88,14 @@ describe('Testes de integração para o recurso de Produto', () => {
   });
 
   it('Deve excluir um produto pelo ID', async () => {
-    const response = await request(app).delete(`/api/produtos/${produtoId}`);
+    const login = await request(app)
+      .post('/api/seguranca/login')
+      .send({
+        login: 'admin',
+        senha: '1234'
+      });
+      
+    const response = await request(app).delete(`/api/produtos/${produtoId}`).auth(login.body.token, {type: "bearer"});
 
     expect(response.status).toBe(204);
   });
