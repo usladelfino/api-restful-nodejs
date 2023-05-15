@@ -18,6 +18,7 @@ jobs:
       DB_USER: ${{ secrets.DB_USER }}
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       DB_DATABASE: ${{ secrets.DB_DATABASE }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
     strategy:
       matrix:

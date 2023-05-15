@@ -6,6 +6,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const produtoController = require('../controllers/produtoController');
+const segurancaController = require('../controllers/segurancaController');
 
 /**
  * Router do Express para lidar com as rotas relacionadas a produtos.
@@ -33,7 +34,7 @@ router.use(bodyParser.json());
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object[]} Array contendo todos os produtos.
  */
-router.get('/produtos', produtoController.getProdutos);
+router.get('/produtos', segurancaController.checkToken, produtoController.getProdutos);
 
 /**
  * Rota para buscar um produto específico pelo ID.
@@ -46,7 +47,7 @@ router.get('/produtos', produtoController.getProdutos);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do produto encontrado.
  */
-router.get('/produtos/:id', produtoController.getProdutoById);
+router.get('/produtos/:id', segurancaController.checkToken, produtoController.getProdutoById);
 
 /**
  * Rota para criar um novo produto.
@@ -59,7 +60,7 @@ router.get('/produtos/:id', produtoController.getProdutoById);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do novo produto criado.
  */
-router.post('/produtos', produtoController.createProduto);
+router.post('/produtos', segurancaController.checkToken, segurancaController.isAdmin, produtoController.createProduto);
 
 /**
  * Rota para atualizar informações de um produto existente.
@@ -72,7 +73,7 @@ router.post('/produtos', produtoController.createProduto);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do produto atualizado.
  */
-router.put('/produtos/:id', produtoController.updateProduto);
+router.put('/produtos/:id', segurancaController.checkToken, segurancaController.isAdmin, produtoController.updateProduto);
 
 /**
  * Rota para excluir um produto existente.
@@ -85,6 +86,6 @@ router.put('/produtos/:id', produtoController.updateProduto);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do produto excluído.
  */
-router.delete('/produtos/:id', produtoController.deleteProduto);
+router.delete('/produtos/:id', segurancaController.checkToken, segurancaController.isAdmin, produtoController.deleteProduto);
 
 module.exports = router;

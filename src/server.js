@@ -8,6 +8,7 @@ const cors = require('cors');
 const path = require ('path');
 const produtoRoutes = require('./api/routes/produtoRoutes');
 const fornecedorRoutes = require('./api/routes/fornecedorRoutes');
+const segurancaRoutes = require('./api/routes/segurancaRoutes');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/app', express.static (path.join (__dirname, '/public')));
 app.use('/api', produtoRoutes);
 app.use('/api', fornecedorRoutes);
+app.use('/api', segurancaRoutes);
 
 /**
  * Inicia o servidor de API e o servidor de documentação (exceto em modo de teste).

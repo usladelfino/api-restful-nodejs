@@ -5,8 +5,16 @@ describe('Testes de integração para o recurso de fornecedor', () => {
   let fornecedorId = null;
 
   it('Deve cadastrar um novo fornecedor', async () => {
+    const login = await request(app)
+      .post('/api/seguranca/login')
+      .send({
+        login: 'admin',
+        senha: '1234'
+      });
+
     const response = await request(app)
       .post('/api/fornecedores')
+      .auth(login.body.token, {type: "bearer"})
       .send({
         nome: 'fornecedor de teste',
         endereco: 'Rua Conde de Bonfim, 255, Tijuca',
@@ -29,7 +37,14 @@ describe('Testes de integração para o recurso de fornecedor', () => {
   });
 
   it('Deve listar todos os fornecedores', async () => {
-    const response = await request(app).get('/api/fornecedores');
+    const login = await request(app)
+      .post('/api/seguranca/login')
+      .send({
+        login: 'usladelfino',
+        senha: '1234'
+      });
+
+    const response = await request(app).get('/api/fornecedores').auth(login.body.token, {type: "bearer"});
 
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Array);
@@ -38,7 +53,14 @@ describe('Testes de integração para o recurso de fornecedor', () => {
 
   
   it('Deve buscar um fornecedor pelo ID', async () => {
-    const response = await request(app).get(`/api/fornecedores/${fornecedorId}`);
+    const login = await request(app)
+      .post('/api/seguranca/login')
+      .send({
+        login: 'usladelfino',
+        senha: '1234'
+      });
+
+    const response = await request(app).get(`/api/fornecedores/${fornecedorId}`).auth(login.body.token, {type: "bearer"});
 
     expect(response.status).toBe(200);
     expect(response.body.nome).toBe('fornecedor de teste');
@@ -51,8 +73,16 @@ describe('Testes de integração para o recurso de fornecedor', () => {
   });
 
   it('Deve atualizar um fornecedor pelo ID', async () => {
+    const login = await request(app)
+      .post('/api/seguranca/login')
+      .send({
+        login: 'admin',
+        senha: '1234'
+      });
+
     const response = await request(app)
       .put(`/api/fornecedores/${fornecedorId}`)
+      .auth(login.body.token, {type: "bearer"})
       .send({
         nome: 'fornecedor de teste alterado',
         endereco: 'Rua Conde de Bonfim, 255, Tijuca',
@@ -73,7 +103,14 @@ describe('Testes de integração para o recurso de fornecedor', () => {
   });
 
   it('Deve excluir um fornecedor pelo ID', async () => {
-    const response = await request(app).delete(`/api/fornecedores/${fornecedorId}`);
+    const login = await request(app)
+      .post('/api/seguranca/login')
+      .send({
+        login: 'admin',
+        senha: '1234'
+      });
+      
+    const response = await request(app).delete(`/api/fornecedores/${fornecedorId}`).auth(login.body.token, {type: "bearer"});
 
     expect(response.status).toBe(204);
   });

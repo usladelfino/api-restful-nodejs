@@ -6,6 +6,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fornecedorController = require('../controllers/fornecedorController');
+const segurancaController = require('../controllers/segurancaController');
+
 
 /**
  * Router do Express para lidar com as rotas relacionadas a fornecedores.
@@ -33,8 +35,7 @@ router.use(bodyParser.json());
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object[]} Array contendo todos os fornecedores.
  */
-router.get('/fornecedores', fornecedorController.getFornecedores);
-
+router.get('/fornecedores', segurancaController.checkToken, fornecedorController.getFornecedores);
 /**
  * Rota para buscar um fornecedor específico pelo ID.
  * @name getfornecedorById
@@ -46,7 +47,7 @@ router.get('/fornecedores', fornecedorController.getFornecedores);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do fornecedor encontrado.
  */
-router.get('/fornecedores/:id', fornecedorController.getFornecedorById);
+router.get('/fornecedores/:id', segurancaController.checkToken, fornecedorController.getFornecedorById);
 
 /**
  * Rota para criar um novo fornecedor.
@@ -59,7 +60,7 @@ router.get('/fornecedores/:id', fornecedorController.getFornecedorById);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do novo fornecedor criado.
  */
-router.post('/fornecedores', fornecedorController.createFornecedor);
+router.post('/fornecedores', segurancaController.checkToken, segurancaController.isAdmin, fornecedorController.createFornecedor);
 
 /**
  * Rota para atualizar informações de um fornecedor existente.
@@ -72,7 +73,7 @@ router.post('/fornecedores', fornecedorController.createFornecedor);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do fornecedor atualizado.
  */
-router.put('/fornecedores/:id', fornecedorController.updateFornecedor);
+router.put('/fornecedores/:id', segurancaController.checkToken, segurancaController.isAdmin, fornecedorController.updateFornecedor);
 
 /**
  * Rota para excluir um fornecedor existente.
@@ -85,6 +86,6 @@ router.put('/fornecedores/:id', fornecedorController.updateFornecedor);
  * @param {function} next - Próxima função de middleware a ser executada.
  * @returns {Object} Objeto contendo informações do fornecedor excluído.
  */
-router.delete('/fornecedores/:id', fornecedorController.deleteFornecedor);
+router.delete('/fornecedores/:id', segurancaController.checkToken, segurancaController.isAdmin, fornecedorController.deleteFornecedor);
 
 module.exports = router;
