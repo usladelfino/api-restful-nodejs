@@ -23,17 +23,17 @@ describe('Testes de integração para o recurso de fornecedor', () => {
         telefone: '(21) 99999-9999',
         email: 'teste@teste.com.br'
       });
-
+    
     expect(response.status).toBe(201);
-    expect(response.body.nome).toBe('fornecedor de teste');
-    expect(response.body.endereco).toBe('Rua Conde de Bonfim, 255, Tijuca');
-    expect(response.body.cidade).toBe('Rio de Janeiro');
-    expect(response.body.estado).toBe('RJ');
-    expect(response.body.telefone).toBe('(21) 99999-9999');
-    expect(response.body.email).toBe('teste@teste.com.br');
-    expect(response.body).toHaveProperty('id');
+    expect(response.body.fornecedor.nome).toBe('fornecedor de teste');
+    expect(response.body.fornecedor.endereco).toBe('Rua Conde de Bonfim, 255, Tijuca');
+    expect(response.body.fornecedor.cidade).toBe('Rio de Janeiro');
+    expect(response.body.fornecedor.estado).toBe('RJ');
+    expect(response.body.fornecedor.telefone).toBe('(21) 99999-9999');
+    expect(response.body.fornecedor.email).toBe('teste@teste.com.br');
+    expect(response.body.fornecedor).toHaveProperty('id');
 
-    fornecedorId = response.body.id;
+    fornecedorId = response.body.fornecedor.id;
   });
 
   it('Deve listar todos os fornecedores', async () => {
@@ -47,8 +47,8 @@ describe('Testes de integração para o recurso de fornecedor', () => {
     const response = await request(app).get('/api/fornecedores').auth(login.body.token, {type: "bearer"});
 
     expect(response.status).toBe(200);
-    expect(response.body).toBeInstanceOf(Array);
-    expect(response.body.length).toBeGreaterThan(0);
+    expect(response.body.fornecedores).toBeInstanceOf(Array);
+    expect(response.body.fornecedores.length).toBeGreaterThan(0);
   });
 
   
@@ -63,13 +63,13 @@ describe('Testes de integração para o recurso de fornecedor', () => {
     const response = await request(app).get(`/api/fornecedores/${fornecedorId}`).auth(login.body.token, {type: "bearer"});
 
     expect(response.status).toBe(200);
-    expect(response.body.nome).toBe('fornecedor de teste');
-    expect(response.body.endereco).toBe('Rua Conde de Bonfim, 255, Tijuca');
-    expect(response.body.cidade).toBe('Rio de Janeiro');
-    expect(response.body.estado).toBe('RJ');
-    expect(response.body.telefone).toBe('(21) 99999-9999');
-    expect(response.body.email).toBe('teste@teste.com.br');
-    expect(response.body.id).toBe(fornecedorId);
+    expect(response.body.fornecedor.nome).toBe('fornecedor de teste');
+    expect(response.body.fornecedor.endereco).toBe('Rua Conde de Bonfim, 255, Tijuca');
+    expect(response.body.fornecedor.cidade).toBe('Rio de Janeiro');
+    expect(response.body.fornecedor.estado).toBe('RJ');
+    expect(response.body.fornecedor.telefone).toBe('(21) 99999-9999');
+    expect(response.body.fornecedor.email).toBe('teste@teste.com.br');
+    expect(response.body.fornecedor.id).toBe(fornecedorId);
   });
 
   it('Deve atualizar um fornecedor pelo ID', async () => {
@@ -93,13 +93,13 @@ describe('Testes de integração para o recurso de fornecedor', () => {
       });
 
     expect(response.status).toBe(200);
-    expect(response.body.nome).toBe('fornecedor de teste alterado');
-    expect(response.body.endereco).toBe('Rua Conde de Bonfim, 255, Tijuca');
-    expect(response.body.cidade).toBe('Rio de Janeiro');
-    expect(response.body.estado).toBe('RJ');
-    expect(response.body.telefone).toBe('(21) 88888-8888');
-    expect(response.body.email).toBe('fornecedor-teste@teste.com.br');
-    expect(response.body.id).toBe(fornecedorId);
+    expect(response.body.updatedFornecedor.nome).toBe('fornecedor de teste alterado');
+    expect(response.body.updatedFornecedor.endereco).toBe('Rua Conde de Bonfim, 255, Tijuca');
+    expect(response.body.updatedFornecedor.cidade).toBe('Rio de Janeiro');
+    expect(response.body.updatedFornecedor.estado).toBe('RJ');
+    expect(response.body.updatedFornecedor.telefone).toBe('(21) 88888-8888');
+    expect(response.body.updatedFornecedor.email).toBe('fornecedor-teste@teste.com.br');
+    expect(response.body.updatedFornecedor.id).toBe(fornecedorId);
   });
 
   it('Deve excluir um fornecedor pelo ID', async () => {

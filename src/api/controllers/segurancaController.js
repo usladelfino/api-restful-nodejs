@@ -25,7 +25,7 @@ const segurancaController = {
             if (checkSenha) {
                 var tokenJWT = jwt.sign({ id: usuario.id }, process.env.SECRET_KEY, { expiresIn: 3600 });
                 usuario.token = tokenJWT;
-                res.status(200).json({token: usuario.token});
+                res.status(200).json({token: usuario.token, roles: usuario.roles});
                 return;
             }
 

@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8">
-	<title>Minha página</title>
-	<link rel="stylesheet" href="style.css">
-	<script src="app.js"></script>
+    <title>Frontend da API</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-	<div class="container">
-		<h1>Bem-vindo à minha página!</h1>
-		<p>Esta é uma página fictícia, criada apenas para demonstração.</p>
-	</div>
+    <h1>Frontend da API</h1>
+    <form id="login-form">
+        <h2>Login</h2>
+        <input type="text" id="login" placeholder="Usuário" required>
+        <input type="password" id="senha" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+    </form>
+
+    <div id="fornecedores-container" style="display: none;">
+        <h2>Lista de Fornecedores</h2>
+        <ul id="fornecedores-list"></ul>
+        <div id="fornecedor-details" style="display: none;" data-id=""></div>
+        <div id="fornecedor-actions"></div>
+        <form id="fornecedor-incluir-form" style="display: none;">
+            <h2 id="fornecedor-incluir-form-title">Incluir Fornecedor</h2>
+            <input type="text" id="nome" placeholder="Nome" required>
+            <input type="text" id="endereco" placeholder="Endereço" required>
+            <input type="text" id="cidade" placeholder="Cidade" required>
+            <input type="text" id="estado" placeholder="UF" required>
+            <input type="text" id="telefone" placeholder="Telefone" required>
+            <input type="text" id="email" placeholder="E-mail" required>
+            <button type="submit">Salvar</button>
+        </form>
+        <form id="fornecedor-editar-form" style="display: none;">
+            <h2 id="fornecedor-incluir-form-title">Editar Fornecedor</h2>
+            <input type="text" id="nome-editar" placeholder="Nome" required>
+            <input type="text" id="endereco-editar" placeholder="Endereço" required>
+            <input type="text" id="cidade-editar" placeholder="Cidade" required>
+            <input type="text" id="estado-editar" placeholder="UF" required>
+            <input type="text" id="telefone-editar" placeholder="Telefone" required>
+            <input type="text" id="email-editar" placeholder="E-mail" required>
+            <button type="submit">Salvar</button>
+        </form>
+    </div>
+    <script src="app.js"></script>
 </body>
+
 </html>
