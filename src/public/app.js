@@ -49,11 +49,11 @@
                     const fornecedorActions = document.getElementById('fornecedor-actions');
                     
                     fornecedoresList.innerHTML = ''; // Limpar a lista de fornecedores
-
+                    console.log(data);
                     if (data.length === 0) {
                         fornecedoresList.innerHTML = '<li>Nenhum fornecedor encontrado.</li>';
                     } else {
-                        data.forEach(fornecedor => {
+                        data.fornecedores.forEach(fornecedor => {
                             const li = document.createElement('li');
                             li.innerText = fornecedor.nome;
                             li.addEventListener('click', () => showFornecedorDetails(fornecedor.id));
@@ -89,14 +89,14 @@
                 .then(response => response.json())
                 .then(data => {
                     const fornecedorDetails = document.getElementById('fornecedor-details');
-                    fornecedorDetails.setAttribute('data-id', data.id);
+                    fornecedorDetails.setAttribute('data-id', data.fornecedor.id);
                     fornecedorDetails.innerHTML = `
-                                                    <h2>${data.nome}</h2>
-                                                    <p><strong>Endereço:</strong> ${data.endereco}</p>
-                                                    <p><strong>Cidade:</strong> ${data.cidade}</p>
-                                                    <p><strong>UF:</strong> ${data.estado}</p>
-                                                    <p><strong>Telefone:</strong> ${data.telefone}</p>
-                                                    <p><strong>E-mail:</strong> ${data.email}</p>
+                                                    <h2>${data.fornecedor.nome}</h2>
+                                                    <p><strong>Endereço:</strong> ${data.fornecedor.endereco}</p>
+                                                    <p><strong>Cidade:</strong> ${data.fornecedor.cidade}</p>
+                                                    <p><strong>UF:</strong> ${data.fornecedor.estado}</p>
+                                                    <p><strong>Telefone:</strong> ${data.fornecedor.telefone}</p>
+                                                    <p><strong>E-mail:</strong> ${data.fornecedor.email}</p>
                                                 `;
 
                     fornecedorDetails.style.display = 'block'; // Exibir os detalhes do fornecedor
@@ -148,12 +148,12 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    fornecedorFormEditar.elements['nome-editar'].value = data.nome;
-                    fornecedorFormEditar.elements['endereco-editar'].value = data.endereco;
-                    fornecedorFormEditar.elements['cidade-editar'].value = data.cidade;
-                    fornecedorFormEditar.elements['estado-editar'].value = data.estado;
-                    fornecedorFormEditar.elements['telefone-editar'].value = data.telefone;
-                    fornecedorFormEditar.elements['email-editar'].value = data.email;
+                    fornecedorFormEditar.elements['nome-editar'].value = data.fornecedor.nome;
+                    fornecedorFormEditar.elements['endereco-editar'].value = data.fornecedor.endereco;
+                    fornecedorFormEditar.elements['cidade-editar'].value = data.fornecedor.cidade;
+                    fornecedorFormEditar.elements['estado-editar'].value = data.fornecedor.estado;
+                    fornecedorFormEditar.elements['telefone-editar'].value = data.fornecedor.telefone;
+                    fornecedorFormEditar.elements['email-editar'].value = data.fornecedor.email;
                 })
                 .catch(error => {
                     console.error('Erro ao buscar detalhes do fornecedor:', error);
