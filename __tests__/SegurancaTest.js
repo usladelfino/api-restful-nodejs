@@ -5,9 +5,16 @@ describe('Testes de integração para o recurso de Seguranca', () => {
   let usuarioId = null;
 
   it('Deve cadastrar um novo usuario', async () => {
-    
+    const login = await request(app)
+      .post('/api/seguranca/login')
+      .send({
+        login: 'admin',
+        senha: '1234'
+      });
+
     const response = await request(app)
       .post('/api/seguranca/register')
+      .auth(login.body.token, {type: "bearer"})
       .send({
         nome: 'usuario teste',
         login: 'teste',

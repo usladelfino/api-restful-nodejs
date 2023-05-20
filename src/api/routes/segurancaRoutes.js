@@ -5,7 +5,7 @@ const segurancaController = require('../controllers/segurancaController');
 const router = express.Router();
 router.use(bodyParser.json());
 
-router.post('/seguranca/register', segurancaController.createUsuario);
+router.post('/seguranca/register', segurancaController.checkToken, segurancaController.isAdmin, segurancaController.createUsuario);
 router.post('/seguranca/login', segurancaController.loginUsuario);
 
 module.exports = router;
