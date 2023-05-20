@@ -20,9 +20,9 @@ const fornecedorController = {
   getFornecedores: async (req, res) => {
     try {
       const fornecedores = await fornecedorModel.getFornecedores();
-      res.json(fornecedores);
+      res.json({success: true, fornecedores});
     } catch (err) {
-      res.status(500).json({message: 'Erro ao consultar fornecedores - ' + err.message })
+      res.status(500).json({success: false, message: 'Erro ao consultar fornecedores - ' + err.message })
     }
   },
 
@@ -43,9 +43,9 @@ const fornecedorController = {
       if (!fornecedor) {
         return res.status(404).send('Fornecedor não encontrado');
       }
-      res.json(fornecedor);
+      res.json({success: true, fornecedor});
     } catch (err) {
-      res.status(500).json({message: 'Erro ao consultar fornecedor - ' + err.message })
+      res.status(500).json({success: false, message: 'Erro ao consultar fornecedor - ' + err.message })
     }
   },
   /**
@@ -62,9 +62,9 @@ const fornecedorController = {
     const fornecedorData = req.body;
     try {
       const fornecedor = await fornecedorModel.createFornecedor(fornecedorData);
-      res.status(201).json(fornecedor);
+      res.status(201).json({success: true, fornecedor});
     } catch (err) {
-      res.status(500).json({message: 'Erro ao cadastrar fornecedor - ' + err.message })
+      res.status(500).json({success: false, message: 'Erro ao cadastrar fornecedor - ' + err.message })
     }
   },
   /**
@@ -86,9 +86,9 @@ const fornecedorController = {
         return res.status(404).send('Fornecedor não encontrado');
       }
       const updatedFornecedor = await fornecedorModel.updateFornecedor(id, FornecedorData);
-      res.json(updatedFornecedor);
+      res.status(200).json({success: true, updatedFornecedor});
     } catch (err) {
-      res.status(500).json({message: 'Erro ao editar dados do fornecedor - ' + err.message })
+      res.status(500).json({success: false, message: 'Erro ao editar dados do fornecedor - ' + err.message })
     }
   },
   /**
@@ -107,13 +107,15 @@ const fornecedorController = {
     const { id } = req.params;
     try {
       const fornecedor = await fornecedorModel.getFornecedorById(id);
+
       if (!fornecedor) {
         return res.status(404).send('Fornecedor não encontrado');
       }
       const deletedFornecedor = await fornecedorModel.deleteFornecedor(id);
-      res.status(204).json(deletedFornecedor);
+
+      res.status(204).json({sucess: true});
     } catch (err) {
-      res.status(500).json({message: 'Erro ao excluir fornecedor - ' + err.message })
+      res.status(500).json({sucess: false, message: 'Erro ao excluir fornecedor - ' + err.message })
     }
   }
 }

@@ -1,17 +1,92 @@
+/* Estilos gerais */
 body {
-	background-color: yellow;
-}
-.container {
-	max-width: 800px;
-	margin: 0 auto;
+	font-family: Arial, sans-serif;
+	margin: 0;
 	padding: 20px;
+}
+
+h1 {
 	text-align: center;
 }
-h1 {
-	font-size: 36px;
-	margin-bottom: 20px;
+
+h2 {
+	margin-top: 20px;
 }
-p {
-	font-size: 24px;
-	margin-bottom: 40px;
+
+/* Estilos do formulário de login */
+#login-form {
+	margin: 0 auto;
+	max-width: 300px;
+}
+
+#login-form input {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+
+#login-form button {
+	width: 100%;
+	padding: 10px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+/* Estilos do contêiner de fornecedores */
+#fornecedores-container {
+	margin-top: 30px;
+}
+
+#fornecedores-list {
+	list-style-type: none;
+	padding: 0;
+}
+
+#fornecedores-list li {
+	cursor: pointer;
+	padding: 5px;
+	background-color: #f1f1f1;
+	margin-bottom: 5px;
+}
+
+#fornecedores-list li:hover {
+	background-color: #e0e0e0;
+}
+
+
+#fornecedores-container {
+	margin-top: 30px;
+}
+
+#fornecedores-list {
+	list-style-type: none;
+	padding: 0;
+}
+
+#fornecedores-list li {
+	cursor: pointer;
+	padding: 5px;
+	background-color: #f1f1f1;
+	margin-bottom: 5px;
+}
+
+#fornecedores-list li:hover {
+	background-color: #e0e0e0;
+}
+
+#fornecedor-details {
+	margin-top: 10px;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 10px;
+}
+
+.label {
+	font-weight: bold;
 }
